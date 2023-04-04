@@ -12,3 +12,16 @@
 -   [ ] Add detail to the environment
 
 # Phase 3 - Polishing
+
+# Checkpoints
+
+## Checkpoint 1
+
+-   Implemented a simple car controller
+-   Created osna terrain and house mesh
+    -   Loaded basic mesh of osna
+    -   Loaded basic house mesh of osna
+
+## Checkpoint 2
+
+-   Implementing arcade car controller
