@@ -5,8 +5,8 @@ using TMPro;
 
 public class CarController : MonoBehaviour
 {
-
     [SerializeField] private TextMeshProUGUI speedText;
+    [SerializeField] private CountdownTimer countdownTimer;
 
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -17,12 +17,9 @@ public class CarController : MonoBehaviour
     private float currentSteerAngle;
     private bool isBreaking;
 
-
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
     [SerializeField] private float maxSteerAngle;
-
-
 
     [SerializeField] private WheelCollider wheelFrontLeft;
     [SerializeField] private WheelCollider wheelFrontRight;
@@ -34,15 +31,17 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform backLeftTransform;
     [SerializeField] private Transform backRightTransform;
 
-
     private void FixedUpdate()
     {
-        GetInput();
-        HandleMotor();
-        HandleSteering();
-        UpdateWheels();
+        if (countdownTimer == null || countdownTimer.canMove)
+        {
+            GetInput();
+            HandleMotor();
+            HandleSteering();
+            UpdateWheels();
 
-        speedText.text = "Speed: " + (int)wheelBackLeft.rpm;
+            speedText.text = "Speed: " + (int)wheelBackLeft.rpm;
+        }
     }
 
     private void HandleMotor()
@@ -68,9 +67,8 @@ public class CarController : MonoBehaviour
         horizontalInput = Input.GetAxis(HORIZONTAL);
         verticalInput = Input.GetAxis(VERTICAL);
         isBreaking = Input.GetKey(KeyCode.Space);
-
     }
-    
+
     private void HandleSteering()
     {
         currentSteerAngle = maxSteerAngle * horizontalInput;
@@ -85,16 +83,16 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(wheelBackLeft, backLeftTransform);
         UpdateSingleWheel(wheelBackRight, backRightTransform);
     }
-    
+
     private void UpdateSingleWheel(
-        WheelCollider collider, 
+        WheelCollider collider,
         Transform transform
-    ) {
+    )
+    {
         Vector3 pos;
         Quaternion rot;
         collider.GetWorldPose(out pos, out rot);
         transform.rotation = rot;
         transform.position = pos;
     }
-
 }
