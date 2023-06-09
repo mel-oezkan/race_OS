@@ -2,6 +2,12 @@
 
 As simple racing game in parts of Osnabrück
 
+## Todos
+
+-   create customized cars
+-   create customized env obj
+-   remove the surro
+
 ## Requirements
 
 -   Unity 2021.3.22f
