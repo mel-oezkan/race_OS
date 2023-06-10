@@ -5,6 +5,9 @@ using UnityEngine;
 public class CarControls : MonoBehaviour
 {
 
+    public PauseScript PauseScript;
+
+
     [SerializeField] private WheelCollider frontRight;
     [SerializeField] private WheelCollider frontLeft;
     [SerializeField] private WheelCollider backRight;
@@ -22,11 +25,15 @@ public class CarControls : MonoBehaviour
     private float currentAcceleration = 0.0f;
     private float currentBreakForce = 0.0f;
     private float currentTurnAngle = 0.0f;
+    private float verticalInput = 0.0f;
+    private float horizontalInput = 0.0f;
+
 
     private void FixedUpdate() 
     {
+        HandleInputs();
 
-        currentAcceleration = acceleration * Input.GetAxis("Vertical");
+        currentAcceleration = acceleration * verticalInput;
         if (Input.GetKey(KeyCode.Space)) 
             currentBreakForce = breakingForce;
         else 
@@ -43,7 +50,7 @@ public class CarControls : MonoBehaviour
         backLeft.brakeTorque = currentBreakForce;
 
         // handle steering
-        currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
+        currentTurnAngle = maxTurnAngle * horizontalInput;
         frontLeft.steerAngle = currentTurnAngle;
         frontRight.steerAngle = currentTurnAngle;
 
@@ -62,17 +69,12 @@ public class CarControls : MonoBehaviour
 
     void HandleInputs() 
     {
-        // handle acceleration
-        currentAcceleration = acceleration * Input.GetAxis("Vertical");
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
 
-        // handle breaking
-        if (Input.GetKey(KeyCode.Space)) 
-            currentBreakForce = breakingForce;
-        else 
-            currentBreakForce = 0.0f;
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+            PauseScript.Setup();
 
-        // handle steering
-        currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
     }
 
     void UpdateWheel(WheelCollider col, Transform trans) 
