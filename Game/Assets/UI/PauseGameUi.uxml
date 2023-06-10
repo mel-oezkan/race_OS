@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Stylesheet.uss?fileID=7433441132597879392&amp;guid=29d40b1b6a316130ca49db219c7c2333&amp;type=3#Stylesheet" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-end;">
+        <ui:VisualElement name="Container" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.48); justify-content: space-around; align-items: center; height: auto; flex-basis: 20%; padding-left: 15%; padding-right: 15%; border-top-width: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-direction: row;">
+            <ui:Button text="Reset" display-tooltip-when-elided="true" class="button" />
+            <ui:Button text="Back" display-tooltip-when-elided="true" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
