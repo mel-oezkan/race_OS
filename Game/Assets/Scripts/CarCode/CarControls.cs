@@ -5,76 +5,91 @@ using UnityEngine;
 public class CarControls : MonoBehaviour
 {
 
+    public Rigidbody carRB;
     public PauseScript PauseScript;
 
 
-    [SerializeField] private WheelCollider frontRight;
-    [SerializeField] private WheelCollider frontLeft;
-    [SerializeField] private WheelCollider backRight;
-    [SerializeField] private WheelCollider backLeft;
+    public WheelColliders colliders;
+    public WheelTransforms wheelTransforms;
 
-    [SerializeField] Transform frontLeftTransform;
-    [SerializeField] Transform frontRightTransform;
+    // user Inputs
+    public float steeringInput = 0.0f;
+    public float forwardInput = 0.0f;
+    public float brakeInput;
 
-    [SerializeField] Transform backLeftTransform;
-    [SerializeField] Transform backRightTransform;
+    // car physics
+    public float slipAngle;
+    public float motorPower;
+    public float brakePower;
+    public float speed;
+    public AnimationCurve steeringCurve;
 
-    public float acceleration = 5000.0f;
-    public float breakingForce = 300.0f;
-    public float maxTurnAngle = 15.0f;
-    private float currentAcceleration = 0.0f;
-    private float currentBreakForce = 0.0f;
-    private float currentTurnAngle = 0.0f;
-    private float verticalInput = 0.0f;
-    private float horizontalInput = 0.0f;
 
+    // debug values
+
+
+    void Start() {
+        carRB = gameObject.GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate() 
-    {
+    {   
+        speed = carRB.velocity.magnitude;
         HandleInputs();
-
-        currentAcceleration = acceleration * verticalInput;
-        if (Input.GetKey(KeyCode.Space)) 
-            currentBreakForce = breakingForce;
-        else 
-            currentBreakForce = 0.0f;
-
-        // apply acceleration
-        frontRight.motorTorque = currentAcceleration;
-        frontLeft.motorTorque = currentAcceleration;
-
-        // apply breaking
-        frontRight.brakeTorque = currentBreakForce;
-        frontLeft.brakeTorque = currentBreakForce;
-        backRight.brakeTorque = currentBreakForce;
-        backLeft.brakeTorque = currentBreakForce;
-
-        // handle steering
-        currentTurnAngle = maxTurnAngle * horizontalInput;
-        frontLeft.steerAngle = currentTurnAngle;
-        frontRight.steerAngle = currentTurnAngle;
-
-        UpdateWheel(frontLeft, frontLeftTransform);
-        UpdateWheel(frontRight, frontRightTransform);
-        UpdateWheel(backLeft, backLeftTransform);
-        UpdateWheel(backRight, backRightTransform);
-        
-        // Debug line to show the current speed
-        Debug.DrawLine(
-            transform.position, 
-            transform.forward * currentAcceleration, 
-            Color.red
-        );
+        ApplyMotorForce();
+        ApplyWheelPositions();
+        ApplySteering();
+        ApplyBreak();
     }
+
+
+    void ApplySteering() {
+        // apply steering
+        float steeringAngle = steeringInput * steeringCurve.Evaluate(speed);
+        colliders.fRWheel.steerAngle = steeringAngle;
+        colliders.fLWheel.steerAngle = steeringAngle;
+    }
+
+    void ApplyMotorForce() {
+        // apply acceleration
+        colliders.bRWheel.motorTorque = motorPower * forwardInput;
+        colliders.bLWheel.motorTorque = motorPower * forwardInput;
+    }        
 
     void HandleInputs() 
     {
-        verticalInput = Input.GetAxis("Vertical");
-        horizontalInput = Input.GetAxis("Horizontal");
+        steeringInput = Input.GetAxis("Horizontal");
+        forwardInput = Input.GetAxis("Vertical");
+
+        slipAngle = Vector3.Angle(
+            transform.forward, 
+            carRB.velocity - transform.forward);
+
+        if (slipAngle > 120f){ 
+            if (forwardInput < 0) {
+                brakeInput = forwardInput;
+                forwardInput = 0f;  
+            } 
+        } else brakeInput = 0f;
 
         if (Input.GetKeyDown(KeyCode.Escape)) 
             PauseScript.Setup();
 
+    }
+
+
+    void ApplyBreak() {
+        colliders.bLWheel.brakeTorque = brakePower * brakeInput * 0.3f;
+        colliders.bRWheel.brakeTorque = brakePower * brakeInput * 0.3f;
+        colliders.fLWheel.brakeTorque = brakePower * brakeInput * 0.7f;
+        colliders.fRWheel.brakeTorque = brakePower * brakeInput * 0.7f;
+    }
+
+    void ApplyWheelPositions() {
+        UpdateWheel(colliders.fRWheel, wheelTransforms.fRWheel);
+        UpdateWheel(colliders.fLWheel, wheelTransforms.fLWheel);
+        UpdateWheel(colliders.bRWheel, wheelTransforms.bRWheel);
+        UpdateWheel(colliders.bLWheel, wheelTransforms.bLWheel);
     }
 
     void UpdateWheel(WheelCollider col, Transform trans) 
@@ -87,4 +102,21 @@ public class CarControls : MonoBehaviour
         trans.position = pos;
         trans.rotation = rot;
     }
+}
+
+
+[System.Serializable]
+public class WheelColliders {
+    public WheelCollider fRWheel;
+    public WheelCollider fLWheel;
+    public WheelCollider bRWheel;
+    public WheelCollider bLWheel;
+}
+
+[System.Serializable]
+public class WheelTransforms {
+    public Transform fRWheel;
+    public Transform fLWheel;
+    public Transform bRWheel;
+    public Transform bLWheel;
 }
