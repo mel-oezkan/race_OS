@@ -272,7 +272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countdownDuration: 3
   countdownText: {fileID: 26636153}
-  canMove: 0
+  canMove: 1
+  carControls: {fileID: 6810930331050255785}
 --- !u!114 &26636153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,9 +1012,9 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
+    m_ExtremumValue: 0.5
+    m_AsymptoteSlip: 0.3
+    m_AsymptoteValue: 0.4
     m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
@@ -36689,9 +36690,9 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
+    m_ExtremumValue: 0.5
+    m_AsymptoteSlip: 0.3
+    m_AsymptoteValue: 0.4
     m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
@@ -40375,9 +40376,9 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
+    m_ExtremumValue: 0.5
+    m_AsymptoteSlip: 0.3
+    m_AsymptoteValue: 0.4
     m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
@@ -40675,9 +40676,9 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
+    m_ExtremumValue: 0.5
+    m_AsymptoteSlip: 0.3
+    m_AsymptoteValue: 0.4
     m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
@@ -41459,7 +41460,7 @@ MonoBehaviour:
   forwardInput: 0
   brakeInput: 0
   slipAngle: 0
-  motorPower: 500
+  motorPower: 1000
   brakePower: 500000
   speed: 0
   steeringCurve:
@@ -41486,7 +41487,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isPaused: 0
+  isPaused: 1
 --- !u!54 &6810930331050255786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41529,6 +41530,7 @@ MonoBehaviour:
   countdownDuration: 3
   countdownText: {fileID: 26636153}
   canMove: 1
+  carControls: {fileID: 0}
 --- !u!114 &6810930331050255789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41677,7 +41679,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7841033483977593262
 GameObject:
