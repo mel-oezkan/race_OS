@@ -11,10 +11,15 @@ public class CountdownTimer : MonoBehaviour
 
     private float currentCountdownValue;
 
+    public CarControls carControls;
+
+
+
     private void Start()
     {
-        // Start the countdown
         StartCountdown();
+        carControls = GameObject.Find("car").GetComponent<CarControls>();
+        carControls.isPaused = true;
     }
 
     private void StartCountdown()
@@ -34,7 +39,8 @@ public class CountdownTimer : MonoBehaviour
     }
 
     private System.Collections.IEnumerator CountdownCoroutine()
-    {
+    {   
+        
         // Wait for one second before starting the countdown
         yield return new WaitForSeconds(1f);
 
@@ -42,8 +48,6 @@ public class CountdownTimer : MonoBehaviour
         {
             // Reduce the countdown value by one
             currentCountdownValue -= 1f;
-
-            // Update the countdown text
             UpdateCountdownText();
 
             // Wait for one second before updating the countdown
@@ -52,6 +56,8 @@ public class CountdownTimer : MonoBehaviour
 
         // Display a message or perform any action when the countdown reaches zero
         countdownText.text = "GO!";
+        carControls.isPaused = false;
+
         canMove = true; // Enable movement
 
         yield return new WaitForSeconds(1f);

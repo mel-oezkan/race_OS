@@ -25,6 +25,9 @@ public class CarControls : MonoBehaviour
     public AnimationCurve steeringCurve;
 
 
+    // environment behaviours
+    public bool isPaused = false;
+
     // debug values
 
 
@@ -34,6 +37,8 @@ public class CarControls : MonoBehaviour
 
     private void FixedUpdate() 
     {   
+        if (isPaused) return;
+
         speed = carRB.velocity.magnitude;
         HandleInputs();
         ApplyMotorForce();

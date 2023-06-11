@@ -19,7 +19,7 @@ public class CamControls : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Vector3 carVelocity = (carRB.velocity + car.transform.forward).normalized;
         transform.position = Vector3.Lerp(
