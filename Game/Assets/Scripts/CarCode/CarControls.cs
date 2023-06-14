@@ -25,8 +25,10 @@ public class CarControls : MonoBehaviour
     public AnimationCurve steeringCurve;
 
 
-    // environment behaviours
+    // environment 
     public bool isPaused = false;
+    public GameObject roadPath;
+
 
     // debug values
 
@@ -45,6 +47,7 @@ public class CarControls : MonoBehaviour
         ApplyWheelPositions();
         ApplySteering();
         ApplyBreak();
+        CheckFlip();
 
         Debug.DrawLine(
             transform.position, 
@@ -88,9 +91,11 @@ public class CarControls : MonoBehaviour
             } else brakeInput = 0f;
         } else brakeInput = 0f;
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-            PauseScript.Setup();
-
+        if (Input.GetKeyDown(KeyCode.Escape)){ 
+            Debug.Log("Escape pressed");
+            Debug.Log("Closest Node: " + GetClosesNode().ToString());
+            // PauseScript.Setup();
+        }
     }
 
 
@@ -118,6 +123,58 @@ public class CarControls : MonoBehaviour
         trans.position = pos;
         trans.rotation = rot;
     }
+
+
+    void CheckFlip() {
+        // if the car is upside down, flip it
+        if (transform.up.y < 0) {
+            // get the closest path node
+            int closestIndex = GetClosesNode();
+            if (closestIndex != -1) {
+                // get the closest node
+                GameObject closestNode = roadPath.transform.GetChild(closestIndex).gameObject;
+
+                // get the nodes position and rotation
+                Vector3 closestNodePos = closestNode.transform.position;
+                Quaternion closestNodeRot = closestNode.transform.rotation;
+                
+                // set the car according to the values
+                transform.position = closestNodePos;
+                transform.rotation = closestNodeRot;
+                carRB.velocity = Vector3.zero;
+                carRB.angularVelocity = Vector3.zero;
+                speed = 0f;
+            } else {
+                Debug.Log("No closest node found");
+            }
+        }
+    }
+
+
+    int GetClosesNode() {
+
+        int closestIndex = -1;
+
+        float closestDistance = Mathf.Infinity;
+        Vector3 carPosition = transform.position;
+
+        // Iterate through the children of the parent object
+        for (int i = 0; i < roadPath.transform.childCount; i++)
+        {   
+
+            GameObject obj = roadPath.transform.GetChild(i).gameObject;
+            float distance = Vector3.Distance(carPosition, obj.transform.position);
+            
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestIndex = i;
+            }
+        }
+
+        return closestIndex;
+    }
+
 }
 
 

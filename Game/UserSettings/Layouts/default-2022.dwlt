@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 36
+  controlID: 19
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 37
+  controlID: 20
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,8 +244,8 @@ MonoBehaviour:
     y: 0
     width: 1075
     height: 576
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 15}
@@ -297,7 +297,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Path-Creator
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -305,16 +305,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Path-Creator/Assets/PathCreator/Core/Editor
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /home/melih/Code/uni/unity/race_OS/Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 99}
-    m_SelectedIDs: 745f0000
-    m_LastClickedID: 24436
-    m_ExpandedIDs: 00000000445f0000765f000000ca9a3bffffff7f
+    m_SelectedIDs: 74590100
+    m_LastClickedID: 88436
+    m_ExpandedIDs: 00000000a0670000c267000078590100845901008c59010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -342,7 +342,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000445f0000
+    m_ExpandedIDs: 00000000a0670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -482,9 +482,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a6b00000
-      m_LastClickedID: 45222
-      m_ExpandedIDs: bcd1ffff52f5ffffc8f9ffffd8f9ffff2efbffff72680000786800000e6a0000366e0000c66f00000070000066b00000
+      m_SelectedIDs: dc67ffff
+      m_LastClickedID: -38948
+      m_ExpandedIDs: 2efbffff5a5f0000605f0000d4600000f6600000ae660000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -851,9 +851,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -255.62086, y: -4.659546, z: -338.48605}
+    m_Target: {x: 529.24384, y: 30.204773, z: -548.2935}
     speed: 2
-    m_Value: {x: -255.62086, y: -4.659546, z: -338.48605}
+    m_Value: {x: 529.24384, y: 30.204773, z: -548.2935}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -899,17 +899,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.35899618, y: 0.5706576, z: -0.30445334, w: 0.67289054}
+    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: 0.35899585, y: 0.5706571, z: -0.30445305, w: 0.6728899}
+    m_Value: {x: 0.7071068, y: 0.0000004681338, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 298.14313
+    m_Target: 167.84047
     speed: 2
-    m_Value: 298.14313
+    m_Value: 167.84047
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_SerializedViewNames: []
   m_SerializedViewValues: []
   m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
+  m_ShowGizmos: 1
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
   m_TargetSize: {x: 1073, y: 534}
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
