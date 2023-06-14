@@ -19,9 +19,9 @@ public class CarControls : MonoBehaviour
 
     // car physics
     public float slipAngle;
-    public float motorPower;
     public float brakePower;
     public float speed;
+    public AnimationCurve motorPower;
     public AnimationCurve steeringCurve;
 
 
@@ -45,6 +45,11 @@ public class CarControls : MonoBehaviour
         ApplyWheelPositions();
         ApplySteering();
         ApplyBreak();
+
+        Debug.DrawLine(
+            transform.position, 
+            transform.position + (carRB.velocity * 100f), 
+            Color.red);
     }
 
 
@@ -57,8 +62,11 @@ public class CarControls : MonoBehaviour
 
     void ApplyMotorForce() {
         // apply acceleration
-        colliders.bRWheel.motorTorque = motorPower * forwardInput;
-        colliders.bLWheel.motorTorque = motorPower * forwardInput;
+        float motorForce = motorPower.Evaluate(speed);
+        colliders.fRWheel.motorTorque = motorForce * forwardInput;
+        colliders.fLWheel.motorTorque = motorForce * forwardInput;
+        colliders.bRWheel.motorTorque = motorForce * forwardInput;
+        colliders.bLWheel.motorTorque = motorForce * forwardInput;
     }        
 
     void HandleInputs() 
@@ -70,11 +78,14 @@ public class CarControls : MonoBehaviour
             transform.forward, 
             carRB.velocity - transform.forward);
 
+        // difference of the two vectors is greater than 120 degrees
         if (slipAngle > 120f){ 
+
+            // makes the car drive backwards
             if (forwardInput < 0) {
                 brakeInput = forwardInput;
                 forwardInput = 0f;  
-            } 
+            } else brakeInput = 0f;
         } else brakeInput = 0f;
 
         if (Input.GetKeyDown(KeyCode.Escape)) 

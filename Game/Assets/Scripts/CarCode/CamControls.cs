@@ -11,6 +11,7 @@ public class CamControls : MonoBehaviour
     public float speed;
     public CarControls carController;
     public Camera cam;
+    public float maxFOV = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +33,8 @@ public class CamControls : MonoBehaviour
 
         transform.LookAt(car);
 
-
-        float desiredFOV = 60f + (carController.speed * 0.2f); // Adjust the coefficient to control the rate of change
+        // Adjust the coefficient to control the rate of change
+        float desiredFOV = Mathf.Max(maxFOV, 60f + carController.speed * 0.2f); 
         float currentFOV = cam.fieldOfView;
         float newFOV = Mathf.Lerp(currentFOV, desiredFOV, Time.deltaTime * 5f); // Adjust the interpolation speed as needed
 

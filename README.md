@@ -43,6 +43,12 @@ As simple racing game in parts of Osnabrück
 ## Problems
 
 -   Creating a useful raod system
+-   Functioning Car Physics
+    -   14.06
+        -   Car is not steering right. It pushesh the car into a direction with a too large force
+        -   car is just drifting right and left. going straight seems no easy task
+        -   when driving backwards the car takes ages to go back straight again
+        -   debugging of the backwards driving is also a nightmare because the camera is not tracking the car correctly. It takes to long to move behind the car and thus makes it unpossible to test the driving. But also increasing the speed of the camera causes the view to "wobble"
 
 ## Grading Scheme
 
