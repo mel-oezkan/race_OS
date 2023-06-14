@@ -11,9 +11,14 @@ public class CamControls : MonoBehaviour
     public float speed;
     public CarControls carController;
     public Camera cam;
+
+    public float minFOV = 60f;
     public float maxFOV = 100f;
 
-    // Start is called before the first frame update
+    // debug values
+    public float currentFOV;
+
+
     void Start()
     {
         carRB = car.GetComponent<Rigidbody>();
@@ -26,19 +31,18 @@ public class CamControls : MonoBehaviour
         transform.position = Vector3.Lerp(
             transform.position, 
             car.position + 
-                car.transform.TransformVector(offset) + 
-                carVelocity * (-5.0f), 
-            speed * Time.deltaTime
+                car.transform.TransformVector(offset), 
+            (carController.speed / 2) * Time.deltaTime
         );
 
         transform.LookAt(car);
 
-        // Adjust the coefficient to control the rate of change
-        float desiredFOV = Mathf.Max(maxFOV, 60f + carController.speed * 0.2f); 
-        float currentFOV = cam.fieldOfView;
-        float newFOV = Mathf.Lerp(currentFOV, desiredFOV, Time.deltaTime * 5f); // Adjust the interpolation speed as needed
+        // Limit the car FOV to a min and max value
+        float desiredFOV = Mathf.Max(minFOV, Mathf.Min(maxFOV, 60f + carController.speed * 0.2f)); 
+        float tmp = cam.fieldOfView;
+        currentFOV = Mathf.Lerp(tmp, desiredFOV, Time.deltaTime * 5f); // Adjust the interpolation speed as needed
 
         // Set the new field of view value to the camera
-        cam.fieldOfView = newFOV;
+        cam.fieldOfView = currentFOV;
     }
 }
