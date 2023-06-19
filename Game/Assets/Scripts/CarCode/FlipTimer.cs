@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class FlipTimer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float flippedStateDuration = 3f; 
+
+    // public for debugging
+    public float currentCountdownValue;
+
     void Start()
     {
+
         
     }
 
@@ -15,4 +20,12 @@ public class FlipTimer : MonoBehaviour
     {
         
     }
+
+    private IEnumerator CountdownCoroutine() 
+    {
+
+    }
+
+
+
 }

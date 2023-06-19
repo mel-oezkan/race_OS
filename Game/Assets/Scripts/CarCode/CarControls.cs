@@ -47,7 +47,7 @@ public class CarControls : MonoBehaviour
         ApplyWheelPositions();
         ApplySteering();
         ApplyBreak();
-        CheckFlip();
+        // CheckFlip();
 
         Debug.DrawLine(
             transform.position, 
@@ -77,6 +77,11 @@ public class CarControls : MonoBehaviour
         steeringInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
 
+        Debug.DrawLine(
+            transform.position, 
+            transform.forward + (carRB.velocity * 100f), 
+            Color.blue);
+        
         slipAngle = Vector3.Angle(
             transform.forward, 
             carRB.velocity - transform.forward);

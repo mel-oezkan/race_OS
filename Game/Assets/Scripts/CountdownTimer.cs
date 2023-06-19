@@ -24,12 +24,13 @@ public class CountdownTimer : MonoBehaviour
 
     private void StartCountdown()
     {
+        // reinitalize the current countdown value as the 
+        // predefined countdown duration
         currentCountdownValue = countdownDuration;
 
-        // Update the countdown text once at the beginning
+        // Update the countdown text and start
+        // the countdown coroutine
         UpdateCountdownText();
-
-        // Start the countdown coroutine
         StartCoroutine(CountdownCoroutine());
     }
 
