@@ -18,8 +18,6 @@ public class CountdownTimer : MonoBehaviour
     private void Start()
     {
         StartCountdown();
-        carControls = GameObject.Find("car").GetComponent<CarControls>();
-        carControls.isPaused = true;
     }
 
     private void StartCountdown()
@@ -60,10 +58,10 @@ public class CountdownTimer : MonoBehaviour
         carControls.isPaused = false;
 
         canMove = true; // Enable movement
+        // Hide the countdown text or perform any other desired action
+        countdownText.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
 
-        // Hide the countdown text or perform any other desired action
-        countdownText.gameObject.SetActive(false);
     }
 }

@@ -47,7 +47,7 @@ public class CarControls : MonoBehaviour
         ApplyWheelPositions();
         ApplySteering();
         ApplyBreak();
-        // CheckFlip();
+        CheckFlip();
 
         Debug.DrawLine(
             transform.position, 
@@ -129,30 +129,66 @@ public class CarControls : MonoBehaviour
         trans.rotation = rot;
     }
 
-
+    private bool isActiveFlip = false;
+     
     void CheckFlip() {
         // if the car is upside down, flip it
         if (transform.up.y < 0) {
-            // get the closest path node
-            int closestIndex = GetClosesNode();
-            if (closestIndex != -1) {
-                // get the closest node
-                GameObject closestNode = roadPath.transform.GetChild(closestIndex).gameObject;
-
-                // get the nodes position and rotation
-                Vector3 closestNodePos = closestNode.transform.position;
-                Quaternion closestNodeRot = closestNode.transform.rotation;
-                
-                // set the car according to the values
-                transform.position = closestNodePos;
-                transform.rotation = closestNodeRot;
-                carRB.velocity = Vector3.zero;
-                carRB.angularVelocity = Vector3.zero;
-                speed = 0f;
-            } else {
-                Debug.Log("No closest node found");
+            Debug.Log("Car is flipped");           
+            if (!isActiveFlip) {
+                StartCoroutine(CountdownCoroutine(3f));
+                isActiveFlip = true;
             }
         }
+    }
+
+    private IEnumerator CountdownCoroutine(float countdownTime) 
+    {
+        Debug.Log("Starting countdown");
+        float currentCountdownValue = countdownTime;
+
+        yield return new WaitForSeconds(1f);
+        while (currentCountdownValue > 0)
+        {
+            // Reduce the countdown value by one
+            currentCountdownValue -= 1f;
+
+            // car is not flipped, break the timer
+            if (transform.up.y > 0.5f) {
+                isActiveFlip = false;
+                yield break;
+            }
+
+            // Wait for one second before updating the countdown
+            yield return new WaitForSeconds(1f);
+        }
+
+        // get the closest path node
+        int closestIndex = GetClosesNode();
+        if (closestIndex != -1) {
+            // get the closest node
+            GameObject closestNode = roadPath.transform.GetChild(closestIndex).gameObject;
+
+            // get the nodes position and rotation
+            Vector3 closestNodePos = closestNode.transform.position;
+            Quaternion closestNodeRot = closestNode.transform.rotation;
+            
+            // set the car according to the values
+            transform.position = closestNodePos;
+
+            Vector3 closestNodeRotValues = closestNodeRot.eulerAngles;
+            transform.rotation = Quaternion.Euler(closestNodeRotValues.x, closestNodeRotValues.y, 0f); 
+            
+            carRB.velocity = Vector3.zero;
+            carRB.angularVelocity = Vector3.zero;
+            speed = 0f;
+
+        } else {
+            Debug.Log("No closest node found");
+        }
+
+        isActiveFlip = false;
+        yield break;
     }
 
 
