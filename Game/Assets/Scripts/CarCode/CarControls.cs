@@ -87,13 +87,13 @@ public class CarControls : MonoBehaviour
             carRB.velocity - transform.forward);
 
         // difference of the two vectors is greater than 120 degrees
-        if (slipAngle > 120f){ 
-
-            // makes the car drive backwards
-            if (forwardInput < 0) {
-                brakeInput = forwardInput;
-                forwardInput = 0f;  
-            } else brakeInput = 0f;
+        if (forwardInput < 0) {
+            if (slipAngle > 120f){
+            brakeInput = forwardInput;
+            forwardInput = 0f;  
+            } else {
+                brakeInput = 0f;
+            }
         } else brakeInput = 0f;
 
         if (Input.GetKeyDown(KeyCode.Escape)){ 
