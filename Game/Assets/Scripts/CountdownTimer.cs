@@ -4,6 +4,9 @@ using TMPro;
 
 public class CountdownTimer : MonoBehaviour
 {
+    public delegate void CountdownFinishedDelegate();
+    public event CountdownFinishedDelegate OnCountdownFinished; // Event declaration
+
     public float countdownDuration = 3f; // Duration of the countdown in seconds
     public TextMeshProUGUI countdownText; // Reference to the countdown text component
 
@@ -11,9 +14,7 @@ public class CountdownTimer : MonoBehaviour
 
     private float currentCountdownValue;
 
-    public CarControls carControls;
-
-
+    public CarController carController; // Reference to the CarController script
 
     private void Start()
     {
@@ -22,7 +23,7 @@ public class CountdownTimer : MonoBehaviour
 
     private void StartCountdown()
     {
-        // reinitalize the current countdown value as the 
+        // Reinitalize the current countdown value as the 
         // predefined countdown duration
         currentCountdownValue = countdownDuration;
 
@@ -38,8 +39,7 @@ public class CountdownTimer : MonoBehaviour
     }
 
     private System.Collections.IEnumerator CountdownCoroutine()
-    {   
-        
+    {
         // Wait for one second before starting the countdown
         yield return new WaitForSeconds(1f);
 
@@ -55,13 +55,14 @@ public class CountdownTimer : MonoBehaviour
 
         // Display a message or perform any action when the countdown reaches zero
         countdownText.text = "GO!";
-        carControls.isPaused = false;
-
         canMove = true; // Enable movement
+
+        // Invoke the OnCountdownFinished event
+        OnCountdownFinished?.Invoke();
+
         // Hide the countdown text or perform any other desired action
         countdownText.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
-
     }
 }

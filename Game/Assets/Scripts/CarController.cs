@@ -16,6 +16,7 @@ public class CarController : MonoBehaviour
     private float currentBrakeForce;
     private float currentSteerAngle;
     private bool isBreaking;
+    private bool canMove;
 
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
@@ -31,9 +32,25 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform backLeftTransform;
     [SerializeField] private Transform backRightTransform;
 
+    private void Start()
+    {
+        if (countdownTimer != null)
+        {
+            countdownTimer.OnCountdownFinished += EnableMovement;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (countdownTimer != null)
+        {
+            countdownTimer.OnCountdownFinished -= EnableMovement;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (countdownTimer == null || countdownTimer.canMove)
+        if (canMove)
         {
             GetInput();
             HandleMotor();
@@ -94,5 +111,10 @@ public class CarController : MonoBehaviour
         collider.GetWorldPose(out pos, out rot);
         transform.rotation = rot;
         transform.position = pos;
+    }
+
+    private void EnableMovement()
+    {
+        canMove = true;
     }
 }
