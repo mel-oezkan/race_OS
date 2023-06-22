@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using UnityEngine.Events;
+
 public class Timer : MonoBehaviour
 {
     private CountdownTimer countdownTimer; // Reference to the CountdownTimer script
@@ -45,6 +47,11 @@ public class Timer : MonoBehaviour
         // or any other desired method
         // For example:
         timerText.text = time.ToString("F2");
+    }
+
+    public void StopTimer()
+    {
+        timerStarted = false;
     }
 
 }

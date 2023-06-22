@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class CarController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private CountdownTimer countdownTimer;
+    [SerializeField] private FinishLine finishLine;
+
 
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -117,4 +120,12 @@ public class CarController : MonoBehaviour
     {
         canMove = true;
     }
+
+    public void StopMovement()
+    {
+        //wheelBackLeft.motorTorque = 0f;
+        //wheelBackRight.motorTorque = 0f;
+        canMove = false;
+    }
+
 }

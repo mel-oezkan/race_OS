@@ -703,7 +703,7 @@ MonoBehaviour:
   countdownDuration: 3
   countdownText: {fileID: 26636153}
   canMove: 0
-  carControls: {fileID: 1146132831288640077}
+  carController: {fileID: 0}
 --- !u!114 &26636153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10900,7 +10900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -230, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &559065203
@@ -10923,7 +10923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Timer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30233,32 +30233,14 @@ GameObject:
   - component: {fileID: 1489922311}
   - component: {fileID: 1489922310}
   - component: {fileID: 1489922309}
-  - component: {fileID: 1489922308}
+  - component: {fileID: 1489922313}
   m_Layer: 0
   m_Name: FinishLine
-  m_TagString: Untagged
+  m_TagString: FinishLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1489922308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489922307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e9b0cc3850861c4d82164fa52b3cd9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carController: {fileID: 0}
-  timer: {fileID: 0}
-  onCarPassedFinishLine:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
 --- !u!65 &1489922309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30337,6 +30319,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1489922313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489922307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56bba76337676b40867bfdd451f35e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1490143363
 GameObject:
   m_ObjectHideFlags: 0
@@ -36059,7 +36053,7 @@ MonoBehaviour:
   countdownDuration: 3
   countdownText: {fileID: 26636153}
   canMove: 0
-  carControls: {fileID: 0}
+  carController: {fileID: 0}
 --- !u!1 &1918428987
 GameObject:
   m_ObjectHideFlags: 0
