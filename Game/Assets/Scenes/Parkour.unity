@@ -1302,6 +1302,54 @@ MonoBehaviour:
   springDamper: 10
   carTopSpeed: 100
   accelInput: 0
+  powerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.53510284
+      inSlope: 0.48060033
+      outSlope: 0.48060033
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.44295102
+    - serializedVersion: 3
+      time: 0.24915485
+      value: 0.98789555
+      inSlope: 0.023200933
+      outSlope: 0.023200933
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.28268144
+    - serializedVersion: 3
+      time: 0.66486514
+      value: 0.98485136
+      inSlope: 0.036359776
+      outSlope: 0.036359776
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23480609
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9730835
+      value: 0.4290161
+      inSlope: -0.30326247
+      outSlope: -0.30326247
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7510757
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  steeringCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1544489409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1578,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   isPaused: 0
   roadPath: {fileID: 0}
+  isFinished: 0
 --- !u!65 &1770428559
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -17,6 +17,11 @@ public class CarPhysics : MonoBehaviour
     public float accelInput = 0f;
 
 
+    public AnimationCurve powerCurve   ;
+    public AnimationCurve steeringCurve;
+
+
+
     Rigidbody rb;
 
 
@@ -66,12 +71,9 @@ public class CarPhysics : MonoBehaviour
             bool rayDidHit = Physics.Raycast(
                 tireTransform[i].position, -transform.up, out tireRay, restSupensionLen);
 
-            Debug.DrawLine(
-                tireTransform[i].position,
-                tireTransform[i].position + tireTransform[i].up * 10f,
-                Color.blue);
 
             accelInput = Input.GetAxis("Vertical");
+
             if (rayDidHit) {
                 Vector3 accelDir = tireTransform[i].forward;
 
@@ -79,22 +81,27 @@ public class CarPhysics : MonoBehaviour
 
                 // normalize the car speed
                 float normSpeed = Mathf.Clamp01(carSpeed / carTopSpeed);
-                float availableTorque = normSpeed * accelInput;
+                float availableTorque = powerCurve.Evaluate(normSpeed * accelInput);
 
                 if (accelInput > 0.0f) {
-                    
+                    Debug.Log(availableTorque);
+                    Debug.DrawLine(
+                        tireTransform[i].position,
+                        tireTransform[i].position + (accelDir * availableTorque),
+                        Color.red);
 
                     rb.AddForceAtPosition(
-                        accelDir * availableTorque,
+                        (accelDir * availableTorque),
                         tireTransform[i].position
                     );
-                }
 
+                }
 
                 Debug.DrawLine(
                     tireTransform[i].position,
                     tireTransform[i].position + (accelDir * availableTorque),
                     Color.blue);
+                
             }
         }
 
