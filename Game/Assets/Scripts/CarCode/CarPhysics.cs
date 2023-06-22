@@ -40,6 +40,12 @@ public class CarPhysics : MonoBehaviour
     // Update is called once per frame
      void FixedUpdate()
     {
+        steerInput = Input.GetAxis("Horizontal");
+        accelInput = Input.GetAxis("Vertical");
+        
+        
+   
+
         for (int i = 0; i < 4; i++) {
             RaycastHit tireRay;       
             bool rayDidHit = Physics.Raycast(
@@ -51,6 +57,10 @@ public class CarPhysics : MonoBehaviour
                     Color.green);
 
             if (rayDidHit) {
+
+                Vector3 rotationDir = transform.up * steerInput * 5f;
+                transform.Rotate(rotationDir * Time.deltaTime);
+
                 
                 Vector3 springDir = tireTransform[i].up;
                 Vector3 tireWorldVel = rb.GetPointVelocity(tireTransform[i].position);
@@ -67,7 +77,6 @@ public class CarPhysics : MonoBehaviour
             }
         }
 
-        steerInput = Input.GetAxis("Horizontal");
 
         for (int i = 0; i < 4; i++) {
             RaycastHit tireRay;       
@@ -106,7 +115,6 @@ public class CarPhysics : MonoBehaviour
                     ? fontTireGrip.Evaluate(steeringVel) 
                     : rearTireGrip.Evaluate(steeringVel); 
 
-                Debug.Log(tireGripFactor);
                 
                 float desiredChange = -steeringVel * tireGripFactor;
 
@@ -133,8 +141,6 @@ public class CarPhysics : MonoBehaviour
                 tireTransform[i].position, -transform.up, out tireRay, restSupensionLen);
 
 
-            accelInput = Input.GetAxis("Vertical");
-
             if (rayDidHit) {
                 Vector3 accelDir = tireTransform[i].forward;
 
@@ -146,7 +152,6 @@ public class CarPhysics : MonoBehaviour
                 float availableTorque = powerCurve.Evaluate(normSpeed * accelInput) / Time.fixedDeltaTime;
 
                 if (accelInput > 0.0f) {
-                    Debug.Log(availableTorque);
 
                     Debug.DrawLine(
                         tireTransform[i].position,
@@ -172,6 +177,14 @@ public class CarPhysics : MonoBehaviour
                 } 
 
             }
+        }
+
+        RaycastHit carRay;       
+        bool carRayHit = Physics.Raycast(
+                transform.position, -transform.up, out carRay, restSupensionLen);
+
+        if (carRayHit) {
+           
         }
 
 
