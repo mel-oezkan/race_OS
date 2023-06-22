@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
@@ -53,5 +52,19 @@ public class Timer : MonoBehaviour
     {
         timerStarted = false;
     }
+    
+    public float GetElapsedTime()
+    {
+        if (timerStarted)
+        {
+            return Time.time - startTime;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+
 
 }

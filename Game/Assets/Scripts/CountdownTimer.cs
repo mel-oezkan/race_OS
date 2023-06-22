@@ -14,7 +14,7 @@ public class CountdownTimer : MonoBehaviour
 
     private float currentCountdownValue;
 
-    public CarController carController; // Reference to the CarController script
+    public CarControls carControls; // Reference to the CarController script
 
     private void Start()
     {
