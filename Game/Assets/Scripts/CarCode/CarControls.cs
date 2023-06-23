@@ -28,8 +28,7 @@ public class CarControls : MonoBehaviour
     public bool isPaused = false;
     public GameObject roadPath;
 
-  
-    
+
 
     // Debug values
 
@@ -38,8 +37,7 @@ public class CarControls : MonoBehaviour
     private void Start()
     {
         carRB = GetComponent<Rigidbody>();
-        
-     
+
     }
 
     private void FixedUpdate()
@@ -98,7 +96,6 @@ public class CarControls : MonoBehaviour
             soundControls.clipStop();
         }
 
-        Debug.Log(carRB.velocity);
         //Background Motor
         if ((carRB.velocity.x > 2) && (carRB.velocity.z > 2))
         {

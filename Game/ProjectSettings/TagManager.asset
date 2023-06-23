@@ -7,6 +7,8 @@ TagManager:
   - Car
   - FinishLine
   - Timer
+  - ShowOnPause
+  - ShowOnFinish
   layers:
   - Default
   - TransparentFX

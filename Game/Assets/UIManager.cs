@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public CarControls carControls;
+    public FinishLine finishLine;
     GameObject[] pauseObjects;
-
+    GameObject[] finishObjects;
+    public bool isFinished = false;
+    
     // Use this for initialization
     void Start()
     {
         Time.timeScale = 1;
-        pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
+
+        pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");            //gets all objects with tag ShowOnPause
+        finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");          //gets all objects with tag ShowOnFinish
+
+
         hidePaused();
-    }
+        hideFinished();
+
+        //finishLine.OnFinishEvent += HandleFinishEvent; // Subscribe to the finish event from the FinishLine script
+    //Checks to make sure MainLevel is the loaded level
+    //if (Application.loadedLevelName == "MainLevel")
+    //   playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+}
 
     // Update is called once per frame
     void Update()
@@ -28,11 +42,20 @@ public class UIManager : MonoBehaviour
             }
             else if (Time.timeScale == 0)
             {
-                Debug.Log("high");
                 Time.timeScale = 1;
                 hidePaused();
             }
         }
+
+
+
+        //shows finish gameobjects if player is dead and timescale = 0
+       if (isFinished == true)
+       {
+            showFinished();
+            
+       }
+
     }
 
 
@@ -41,6 +64,7 @@ public class UIManager : MonoBehaviour
     {
         Application.LoadLevel(Application.loadedLevel);
     }
+
 
     //controls the pausing of the scene
     public void pauseControl()
@@ -74,6 +98,35 @@ public class UIManager : MonoBehaviour
             g.SetActive(false);
         }
     }
+
+    //hides objects with ShowOnFinish tag
+    public void hideFinished()
+    {
+        foreach (GameObject g in finishObjects)
+        {
+            g.SetActive(false);
+        }
+    }
+
+    //shows objects with ShowOnFinish tag
+    public void showFinished()
+    {
+        StartCoroutine(ShowFinishedCoroutine());
+    }
+
+    private IEnumerator ShowFinishedCoroutine()
+    {
+        
+        yield return new WaitForSeconds(3f);
+
+        foreach (GameObject g in finishObjects)
+        {
+            g.SetActive(true);
+        }
+    }
+
+
+
 
     //loads inputted level
     public void LoadLevel(string level)
