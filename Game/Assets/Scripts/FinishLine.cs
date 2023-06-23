@@ -18,7 +18,7 @@ public class FinishLine : MonoBehaviour
 
 
 
-    private float imageDelay = 2f;
+    private float imageDelay = 1f;
 
     private void OnTriggerEnter(Collider other)
     {

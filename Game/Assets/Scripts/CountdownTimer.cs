@@ -20,9 +20,10 @@ public class CountdownTimer : MonoBehaviour
 
     private void Start()
     {
+        soundControls.playSound("gameMusic");
         StartCountdown();
         soundControls.playSound("countdown");
-        soundControls.playSound("gameMusic");
+        
 
     }
 
