@@ -7,7 +7,7 @@ public class ImageGood : MonoBehaviour
         HideImage();
     }
 
-    public void ShowImage()
+    public void ShowImage1()
     {
         gameObject.SetActive(true);
     }
