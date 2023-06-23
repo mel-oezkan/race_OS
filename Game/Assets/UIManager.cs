@@ -22,11 +22,6 @@ public class UIManager : MonoBehaviour
         hidePaused();
         hideFinished();
 
-        //finishLine.OnFinishEvent += HandleFinishEvent; // Subscribe to the finish event from the FinishLine script
-    //Checks to make sure MainLevel is the loaded level
-    //if (Application.loadedLevelName == "MainLevel")
-    //   playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-}
 
     // Update is called once per frame
     void Update()
@@ -117,7 +112,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator ShowFinishedCoroutine()
     {
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         foreach (GameObject g in finishObjects)
         {
