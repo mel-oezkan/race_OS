@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2836d902ca216d640a771e10d7747ca0, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 95093b647437996479209094dd2ade60, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -860,11 +860,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioclipsSource: {fileID: 470550363}
-  audiobackgroundSource: {fileID: 470550362}
+  audiobackgroundMotorSource: {fileID: 470550362}
   audioFinishSource: {fileID: 470550364}
   countdownSource: {fileID: 470550365}
+  gameMusicSource: {fileID: 470550366}
   accelerationClip: {fileID: 8300000, guid: ae27089bad3c76546a12bcf008450715, type: 3}
-  backgroundClip: {fileID: 8300000, guid: 9f748e1f47c993f45a524c60fc61879e, type: 3}
+  backgroundMotorClip: {fileID: 8300000, guid: 9f748e1f47c993f45a524c60fc61879e, type: 3}
   goodClip: {fileID: 8300000, guid: feebed464d946a14a852a9abb920123f, type: 3}
   najaClip: {fileID: 8300000, guid: 230adb0998285164c8094483e73291ab, type: 3}
   badClip: {fileID: 8300000, guid: 06370f01956d10542aa5f3ff0e8a42b2, type: 3}
@@ -1281,7 +1282,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.341
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1678,8 +1679,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -230, y: -150}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -290, y: -200}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &559065203
 MonoBehaviour:
@@ -1701,7 +1702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Timer
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2324,7 +2325,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872041282
 MonoBehaviour:
@@ -3991,7 +3992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489922307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -260.0591, y: 1.06, z: -372.91}
+  m_LocalPosition: {x: -50, y: 1.55, z: -360}
   m_LocalScale: {x: 1, y: 3.2627, z: 24.34296}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4865,7 +4866,7 @@ MonoBehaviour:
   countdownDuration: 3
   countdownText: {fileID: 26636153}
   canMove: 0
-  carControls: {fileID: 0}
+  carControls: {fileID: 1146132831288640077}
 --- !u!1 &1922636240
 GameObject:
   m_ObjectHideFlags: 0

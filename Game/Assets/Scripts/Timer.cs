@@ -28,7 +28,6 @@ public class Timer : MonoBehaviour
         startTime = Time.time;
         timerStarted = true;
 
-        Debug.Log("Timer started!");
     }
 
 
@@ -46,7 +45,10 @@ public class Timer : MonoBehaviour
         // Update the timer text using the TextMeshProUGUI component
         // or any other desired method
         // For example:
-        timerText.text = time.ToString("F2");
+        // Display the elapsed time in seconds
+        //timeText.text = "Time: " + elapsedTime.ToString("F2") + " sec";
+        timerText.text = "Time: " + time.ToString("F2") + " sec";
+
     }
 
     public void StopTimer()
