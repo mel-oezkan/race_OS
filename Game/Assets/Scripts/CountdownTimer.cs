@@ -4,6 +4,8 @@ using TMPro;
 
 public class CountdownTimer : MonoBehaviour
 {
+    [SerializeField] private SoundControls soundControls;
+
     public delegate void CountdownFinishedDelegate();
     public event CountdownFinishedDelegate OnCountdownFinished; // Event declaration
 
@@ -19,6 +21,9 @@ public class CountdownTimer : MonoBehaviour
     private void Start()
     {
         StartCountdown();
+        soundControls.playSound("countdown");
+        soundControls.playSound("gameMusic");
+
     }
 
     private void StartCountdown()

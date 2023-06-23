@@ -38,6 +38,8 @@ public class CarControls : MonoBehaviour
     private void Start()
     {
         carRB = GetComponent<Rigidbody>();
+        
+     
     }
 
     private void FixedUpdate()
@@ -52,7 +54,7 @@ public class CarControls : MonoBehaviour
         ApplySteering();
         ApplyBreak();
         CheckFlip();
-        soundControls.playSound("acceleration");
+        
         Debug.DrawLine(transform.position, transform.position + (carRB.velocity * 100f), Color.red);
     }
 
@@ -72,6 +74,8 @@ public class CarControls : MonoBehaviour
         colliders.fLWheel.motorTorque = motorForce * forwardInput;
         colliders.bRWheel.motorTorque = motorForce * forwardInput;
         colliders.bLWheel.motorTorque = motorForce * forwardInput;
+
+    
     }
 
     private void HandleInputs()
@@ -82,6 +86,28 @@ public class CarControls : MonoBehaviour
         Debug.DrawLine(transform.position, transform.forward + (carRB.velocity * 100f), Color.blue);
 
         slipAngle = Vector3.Angle(transform.forward, carRB.velocity - transform.forward);
+
+        //Motor Sounds
+        if ((forwardInput > 0) && (!soundControls.isPlaying()))
+        {
+            soundControls.playSound("acceleration");
+
+        }
+        if(forwardInput == 0)
+        {
+            soundControls.clipStop();
+        }
+
+        Debug.Log(carRB.velocity);
+        //Background Motor
+        if ((carRB.velocity.x > 2) && (carRB.velocity.z > 2))
+        {
+            soundControls.playSound("backgroundMotor");
+        }
+        else
+        {
+            soundControls.backgroundMotorStop();
+        }
 
         // Difference of the two vectors is greater than 120 degrees
         if (forwardInput < 0)

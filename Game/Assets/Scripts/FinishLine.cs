@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FinishLine : MonoBehaviour
 {
+    [SerializeField] private SoundControls soundControls; 
+    
     public event System.Action OnCarPassedFinishLine; // Event to be invoked when the car passes the finish line
 
     public CarControls carControls; // Reference to the CarControls script
@@ -13,6 +15,8 @@ public class FinishLine : MonoBehaviour
     public ImageNaja imageNaja;
     public ImageBad imageBad;
     public List<Sprite> images; // List of image sprites
+
+
 
     private float imageDelay = 2f;
 
@@ -25,6 +29,9 @@ public class FinishLine : MonoBehaviour
             carControls.StopMovement();
             timer.StopTimer();
             StartCoroutine(ShowImageCoroutine());
+            soundControls.gameMusicStop();
+            soundControls.backgroundMotorStop();
+            soundControls.clipStop();
         }
     }
 
@@ -38,14 +45,17 @@ public class FinishLine : MonoBehaviour
         if (elapsedTime < 3f)
         {
             imageGood.ShowImage();
+            soundControls.playSound("good");
         }
         else if (elapsedTime >= 3f && elapsedTime <= 7f)
         {
             imageNaja.ShowImage();
+            soundControls.playSound("naja");
         }
         else
         {
             imageBad.ShowImage();
+            soundControls.playSound("bad");
         }
     }
 }
