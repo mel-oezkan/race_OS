@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     GameObject[] pauseObjects;
     GameObject[] finishObjects;
     public bool isFinished = false;
-    
+
     // Use this for initialization
     void Start()
     {
@@ -18,15 +18,13 @@ public class UIManager : MonoBehaviour
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");            //gets all objects with tag ShowOnPause
         finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");          //gets all objects with tag ShowOnFinish
 
-
         hidePaused();
         hideFinished();
-
+    }
 
     // Update is called once per frame
     void Update()
     {
-
         //uses the p button to pause and unpause the game
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -42,24 +40,18 @@ public class UIManager : MonoBehaviour
             }
         }
 
-
-
         //shows finish gameobjects if player is dead and timescale = 0
-       if (isFinished == true)
-       {
+        if (isFinished == true)
+        {
             showFinished();
-            
-       }
-
+        }
     }
-
 
     //Reloads the Level
     public void Reload()
     {
         Application.LoadLevel(Application.loadedLevel);
     }
-
 
     //controls the pausing of the scene
     public void pauseControl()
@@ -111,7 +103,6 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator ShowFinishedCoroutine()
     {
-        
         yield return new WaitForSeconds(4f);
 
         foreach (GameObject g in finishObjects)
@@ -119,9 +110,6 @@ public class UIManager : MonoBehaviour
             g.SetActive(true);
         }
     }
-
-
-
 
     //loads inputted level
     public void LoadLevel(string level)
