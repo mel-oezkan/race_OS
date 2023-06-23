@@ -7,13 +7,13 @@ public class ImageNaja : MonoBehaviour
         HideImage();
     }
 
-    public void ShowImage1()
+    public void ShowImage()
     {
-        gameObject1.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void HideImage()
     {
-        gameObject1.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

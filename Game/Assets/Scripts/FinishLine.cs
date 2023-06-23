@@ -34,6 +34,7 @@ public class FinishLine : MonoBehaviour
 
         float elapsedTime = timer.GetElapsedTime(); // Get the elapsed time from the Timer class
 
+        Debug.Log(elapsedTime);
         if (elapsedTime < 3f)
         {
             imageGood.ShowImage();

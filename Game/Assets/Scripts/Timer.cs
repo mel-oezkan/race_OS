@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
 
     private float startTime;
     private bool timerStarted;
+    private float elapsedTime;
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class Timer : MonoBehaviour
     {
         if (timerStarted)
         {
-            float elapsedTime = Time.time - startTime;
+            elapsedTime = Time.time - startTime;
             UpdateTimerText(elapsedTime);
         }
     }
@@ -55,14 +56,8 @@ public class Timer : MonoBehaviour
     
     public float GetElapsedTime()
     {
-        if (timerStarted)
-        {
-            return Time.time - startTime;
-        }
-        else
-        {
-            return 0f;
-        }
+        elapsedTime = Time.time - startTime - 2f;
+        return elapsedTime;
     }
 
 

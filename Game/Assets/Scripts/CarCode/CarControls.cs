@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarControls : MonoBehaviour
 {
+    [SerializeField] private SoundControls soundControls;
+
     public Rigidbody carRB;
     public PauseScript PauseScript;
     public WheelColliders colliders;
@@ -24,6 +27,9 @@ public class CarControls : MonoBehaviour
     // Environment
     public bool isPaused = false;
     public GameObject roadPath;
+
+  
+    
 
     // Debug values
 
@@ -46,7 +52,7 @@ public class CarControls : MonoBehaviour
         ApplySteering();
         ApplyBreak();
         CheckFlip();
-
+        soundControls.playSound("acceleration");
         Debug.DrawLine(transform.position, transform.position + (carRB.velocity * 100f), Color.red);
     }
 
@@ -80,6 +86,7 @@ public class CarControls : MonoBehaviour
         // Difference of the two vectors is greater than 120 degrees
         if (forwardInput < 0)
         {
+            
             if (slipAngle > 120f)
             {
                 brakeInput = forwardInput;
