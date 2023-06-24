@@ -17,20 +17,41 @@ public class CarPhysics : MonoBehaviour
 
     public float carTopSpeed = 100f;
     public float accelInput = 0f;
-
+    public float speedmultiplier = 1f;
     public float tireMass = 10f;
     public float steerInput = 0f;
     public float maxSteeringAngle = 30f;
-
+    public float carSpeed = 0f;
 
     public AnimationCurve powerCurve;
     public AnimationCurve fontTireGrip;
     public AnimationCurve rearTireGrip;
 
-    public float carSpeed = 0f;
-
+    public bool isBoostEnabled = false;
     Rigidbody rb;
 
+    
+    public void Update()
+    {
+        // Turbo boost
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            if(!isBoostEnabled)
+            {
+                isBoostEnabled = true;
+                speedmultiplier =100f;
+                Debug.Log("Boost enabled");
+            }
+            else if(isBoostEnabled)
+            {
+                isBoostEnabled = false;
+                Debug.Log("Boost disabled");
+                accelInput = 0f;
+                speedmultiplier = 1f;
+            }
+        }
+        
+    }
 
 
     // Start is called before the first frame update
@@ -135,7 +156,7 @@ public class CarPhysics : MonoBehaviour
 
             // normalize the car speed
             float normSpeed = Mathf.Clamp(Mathf.Abs(carSpeed) / carTopSpeed, 0, 1);
-            float availableTorque = powerCurve.Evaluate(normSpeed) * accelInput;
+            float availableTorque = powerCurve.Evaluate(normSpeed) * accelInput * speedmultiplier;
             Vector3 accelerationForce = accelDir * availableTorque ;
 
             // calculate the steering angle
