@@ -25,7 +25,7 @@ public class CarPhysics : MonoBehaviour
     public AnimationCurve fontTireGrip;
     public AnimationCurve rearTireGrip;
 
-
+    public float carSpeed = 0f;
 
     Rigidbody rb;
 
@@ -37,47 +37,50 @@ public class CarPhysics : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-     void FixedUpdate()
-    {
-        steerInput = Input.GetAxis("Horizontal");
-        accelInput = Input.GetAxis("Vertical");
-        
-        
-   
-
-        for (int i = 0; i < 4; i++) {
+    void HandleSuspension() {
+         for (int i = 0; i < 4; i++) {
             RaycastHit tireRay;       
             bool rayDidHit = Physics.Raycast(
-                tireTransform[i].position, -transform.up, out tireRay, restSupensionLen);
+                tireTransform[i].position, 
+                -transform.up, 
+                out tireRay, 
+                restSupensionLen
+            );
 
-            Debug.DrawLine(
-                    tireTransform[i].position,
-                    tireTransform[i].position + tireTransform[i].up,
-                    Color.green);
-
+            // check if the raycast hit the ground
             if (rayDidHit) {
-
                 Vector3 rotationDir = transform.up * steerInput * 5f;
                 transform.Rotate(rotationDir * Time.deltaTime);
 
-                
-                Vector3 springDir = tireTransform[i].up;
+                // handle the tire damping direction 
+                // (find in which direction the force should be applied)
+                Vector3 springDir = transform.up;
                 Vector3 tireWorldVel = rb.GetPointVelocity(tireTransform[i].position);
 
                 float offset = restSupensionLen - tireRay.distance;
 
+                // calculate the force and velocity
                 float vel = Vector3.Dot(springDir, tireWorldVel);
-
                 float force = (offset * springStrength) - (vel * springDamper);
+
+                // Debug.DrawLine(
+                //     tireTransform[i].position,
+                //     tireTransform[i].position + (springDir * force),
+                //     Color.green);
+
+                Debug.DrawLine(
+                    tireTransform[i].position,
+                    tireTransform[i].position + (vel * springDir),
+                    Color.green);
 
                 rb.AddForceAtPosition(
                     (springDir * force), 
                     tireTransform[i].position);
             }
         }
+    }
 
-
+    void HandleSteering () {
         for (int i = 0; i < 4; i++) {
             RaycastHit tireRay;       
             bool rayDidHit = Physics.Raycast(
@@ -87,7 +90,6 @@ public class CarPhysics : MonoBehaviour
                     tireTransform[i].position,
                     tireTransform[i].position + tireTransform[i].right,
                     Color.green);
-
             
             if (rayDidHit) {
                 Vector3 steeringDir = tireTransform[i].right;
@@ -95,29 +97,12 @@ public class CarPhysics : MonoBehaviour
 
                 float steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
 
-                // if (i > 2) {
-                //     float carSpeed = Vector3.Dot(transform.forward, rb.velocity);
-                //     float normSpeed = Mathf.Clamp01(carSpeed / carTopSpeed);
-                    
-                //     // based on the speed of the car, get the possible steering angle
-                //     // float availableSteerTorque = steeringCurve.Evaluate(normSpeed) * steerInput;
-                //     float availableSteerTorque = 0.5f * steerInput;
-                    
-                //     if (steerInput != 0) {
-                //     rb.AddForceAtPosition(
-                //         (steeringDir * availableSteerTorque),
-                //         tireTransform[i].position
-                //     );}
-                // }
-
-
                 float tireGripFactor = (i < 2) 
                     ? fontTireGrip.Evaluate(steeringVel) 
                     : rearTireGrip.Evaluate(steeringVel); 
 
                 
                 float desiredChange = -steeringVel * tireGripFactor;
-
                 float desiredAccel = desiredChange / Time.fixedDeltaTime;
 
                 rb.AddForceAtPosition(
@@ -132,7 +117,9 @@ public class CarPhysics : MonoBehaviour
             }
 
         }
+    }
 
+    void HandleAcceleration () {
         // only steer the car with front tires
         for (int i = 0; i < 2; i++) 
         {
@@ -162,30 +149,54 @@ public class CarPhysics : MonoBehaviour
                         (accelDir * availableTorque),
                         tireTransform[i].position
                     );
-                } else {
+                } else if (accelInput < 0.0f) {
                     
                     Debug.DrawLine(
                         tireTransform[i].position,
                         tireTransform[i].position + (-accelDir * availableTorque) * 0.6f,
                         Color.red);
 
+
                     rb.AddForceAtPosition(
                         (-accelDir * availableTorque) * 0.6f,
                         tireTransform[i].position
                     );
 
-                } 
+                } else {
+
+                }
 
             }
         }
+    }
 
-        RaycastHit carRay;       
-        bool carRayHit = Physics.Raycast(
-                transform.position, -transform.up, out carRay, restSupensionLen);
+     void FixedUpdate()
+    {
+        steerInput = Input.GetAxis("Horizontal");
+        accelInput = Input.GetAxis("Vertical");
+        
+        
+        carSpeed = Vector3.Dot(transform.forward, rb.velocity);
 
-        if (carRayHit) {
-           
+        HandleSuspension();
+        HandleSteering();
+        HandleAcceleration();
+        
+        if (steerInput == 0 && accelInput == 0) {
+            for (int i = 0; i< 4; i++) {
+                Vector3 tireWorldVel = rb.GetPointVelocity(tireTransform[i].position);
+                rb.AddForceAtPosition(
+                    tireWorldVel * -0.1f * rb.mass,
+                    tireTransform[i].position
+                );
+
+                Debug.DrawLine(
+                    tireTransform[i].position,
+                    tireTransform[i].position + tireWorldVel,
+                    Color.yellow);
+            }
         }
+
 
 
     }
