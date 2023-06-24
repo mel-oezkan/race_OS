@@ -8,7 +8,7 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private SoundControls soundControls;
     public UIManager uiManager;
 
-    public event System.Action OnCarPassedFinishLine; // Event to be invoked when the car passes the finish line
+    //public event System.Action OnCarPassedFinishLine; // Event to be invoked when the car passes the finish line
 
     public CarControls carControls; // Reference to the CarControls script
     public Timer timer;
@@ -23,7 +23,7 @@ public class FinishLine : MonoBehaviour
 
     private float imageDelay = 1f;
 
-    public event System.Action OnFinishEvent; // Event to be invoked when the car passes the finish line
+    //public event System.Action OnFinishEvent; // Event to be invoked when the car passes the finish line
 
     private void OnTriggerEnter(Collider other)
     {

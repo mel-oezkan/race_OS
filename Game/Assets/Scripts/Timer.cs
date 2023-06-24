@@ -46,9 +46,8 @@ public class Timer : MonoBehaviour
         // or any other desired method
         // For example:
         // Display the elapsed time in seconds
-        //timeText.text = "Time: " + elapsedTime.ToString("F2") + " sec";
         timerText.text = "Time: " + time.ToString("F2") + " sec";
-
+        Debug.Log("timer");
     }
 
     public void StopTimer()
@@ -62,6 +61,9 @@ public class Timer : MonoBehaviour
         return elapsedTime;
     }
 
-
+    public void ClockReducesTime()
+    {
+        startTime += 4f;
+    }
 
 }

@@ -9,6 +9,7 @@ TagManager:
   - Timer
   - ShowOnPause
   - ShowOnFinish
+  - Clock
   layers:
   - Default
   - TransparentFX

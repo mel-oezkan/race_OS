@@ -14,6 +14,8 @@ public class SoundControls : MonoBehaviour
 
     [SerializeField] private AudioSource gameMusicSource;
 
+    [SerializeField] private AudioSource clockSource;
+
 
     [SerializeField] private AudioClip accelerationClip;
 
@@ -28,6 +30,8 @@ public class SoundControls : MonoBehaviour
     [SerializeField] private AudioClip countdownClip;
 
     [SerializeField] private AudioClip gameMusicClip;
+
+    [SerializeField] private AudioClip clockClip;
 
 
 
@@ -73,6 +77,10 @@ public class SoundControls : MonoBehaviour
         else if (clipName == "gameMusic")
         {
             gameMusicSource.PlayOneShot(gameMusicClip);
+        }
+        else if (clipName == "clock")
+        {
+            clockSource.PlayOneShot(clockClip);
         }
     }
 

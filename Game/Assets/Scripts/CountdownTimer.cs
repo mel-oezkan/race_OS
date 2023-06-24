@@ -21,9 +21,9 @@ public class CountdownTimer : MonoBehaviour
     private void Start()
     {
         StartCountdown();
-        soundControls.playSound("gameMusic");
+        //soundControls.playSound("gameMusic");
         
-        soundControls.playSound("countdown");
+        //soundControls.playSound("countdown");
         
 
     }
