@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarControls : MonoBehaviour
 {
+    [SerializeField] private SoundControls soundControls;
+
     public Rigidbody carRB;
     public PauseScript PauseScript;
     public WheelColliders colliders;
@@ -25,6 +28,8 @@ public class CarControls : MonoBehaviour
     public bool isPaused = false;
     public GameObject roadPath;
 
+
+
     // Debug values
 
     public bool isFinished = false; // Flag to indicate if the car has finished
@@ -32,6 +37,7 @@ public class CarControls : MonoBehaviour
     private void Start()
     {
         carRB = GetComponent<Rigidbody>();
+
     }
 
     private void FixedUpdate()
@@ -46,7 +52,7 @@ public class CarControls : MonoBehaviour
         ApplySteering();
         ApplyBreak();
         CheckFlip();
-
+        
         Debug.DrawLine(transform.position, transform.position + (carRB.velocity * 100f), Color.red);
     }
 
@@ -66,6 +72,8 @@ public class CarControls : MonoBehaviour
         colliders.fLWheel.motorTorque = motorForce * forwardInput;
         colliders.bRWheel.motorTorque = motorForce * forwardInput;
         colliders.bLWheel.motorTorque = motorForce * forwardInput;
+
+    
     }
 
     private void HandleInputs()
@@ -77,9 +85,31 @@ public class CarControls : MonoBehaviour
 
         slipAngle = Vector3.Angle(transform.forward, carRB.velocity - transform.forward);
 
+        //Motor Sounds
+        if ((forwardInput > 0) && (!soundControls.isPlaying()))
+        {
+            soundControls.playSound("acceleration");
+
+        }
+        if(forwardInput == 0)
+        {
+            soundControls.clipStop();
+        }
+
+        //Background Motor
+        if ((carRB.velocity.x > 2) && (carRB.velocity.z > 2))
+        {
+            soundControls.playSound("backgroundMotor");
+        }
+        else
+        {
+            soundControls.backgroundMotorStop();
+        }
+
         // Difference of the two vectors is greater than 120 degrees
         if (forwardInput < 0)
         {
+            
             if (slipAngle > 120f)
             {
                 brakeInput = forwardInput;
@@ -228,6 +258,13 @@ public class CarControls : MonoBehaviour
         brakeInput = 1f;
         ApplyMotorForce();
         ApplyBreak();
+    }
+    public void StartMovement()
+    {
+        isFinished = false; // Reset the isFinished flag to false
+        forwardInput = 1f; // Set the forward input to start moving forward
+        steeringInput = 0f; // Reset the steering input
+        brakeInput = 0f; // Reset the brake input
     }
 }
 

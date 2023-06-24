@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
@@ -11,6 +10,7 @@ public class Timer : MonoBehaviour
 
     private float startTime;
     private bool timerStarted;
+    private float elapsedTime;
 
     private void Start()
     {
@@ -28,7 +28,6 @@ public class Timer : MonoBehaviour
         startTime = Time.time;
         timerStarted = true;
 
-        Debug.Log("Timer started!");
     }
 
 
@@ -36,7 +35,7 @@ public class Timer : MonoBehaviour
     {
         if (timerStarted)
         {
-            float elapsedTime = Time.time - startTime;
+            elapsedTime = Time.time - startTime;
             UpdateTimerText(elapsedTime);
         }
     }
@@ -46,12 +45,23 @@ public class Timer : MonoBehaviour
         // Update the timer text using the TextMeshProUGUI component
         // or any other desired method
         // For example:
-        timerText.text = time.ToString("F2");
+        // Display the elapsed time in seconds
+        //timeText.text = "Time: " + elapsedTime.ToString("F2") + " sec";
+        timerText.text = "Time: " + time.ToString("F2") + " sec";
+
     }
 
     public void StopTimer()
     {
         timerStarted = false;
     }
+    
+    public float GetElapsedTime()
+    {
+        elapsedTime = Time.time - startTime - 2f;
+        return elapsedTime;
+    }
+
+
 
 }

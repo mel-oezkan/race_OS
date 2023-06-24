@@ -4,6 +4,8 @@ using TMPro;
 
 public class CountdownTimer : MonoBehaviour
 {
+    [SerializeField] private SoundControls soundControls;
+
     public delegate void CountdownFinishedDelegate();
     public event CountdownFinishedDelegate OnCountdownFinished; // Event declaration
 
@@ -14,11 +16,16 @@ public class CountdownTimer : MonoBehaviour
 
     private float currentCountdownValue;
 
-    public CarController carController; // Reference to the CarController script
+    public CarControls carControls; // Reference to the CarController script
 
     private void Start()
     {
         StartCountdown();
+        soundControls.playSound("gameMusic");
+        
+        soundControls.playSound("countdown");
+        
+
     }
 
     private void StartCountdown()
