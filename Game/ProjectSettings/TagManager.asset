@@ -10,6 +10,7 @@ TagManager:
   - ShowOnPause
   - ShowOnFinish
   - Clock
+  - TeleportTrigger
   layers:
   - Default
   - TransparentFX
