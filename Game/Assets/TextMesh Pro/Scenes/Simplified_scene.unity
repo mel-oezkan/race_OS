@@ -2218,13 +2218,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 1146132831288640076}
-  m_RootOrder: 3
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 18
->>>>>>> ad132785d503a107fcaabd46958bfab636a00aa1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &470550362
 AudioSource:
@@ -6666,11 +6661,7 @@ Transform:
   - {fileID: 1993062656}
   - {fileID: 1980304759}
   m_Father: {fileID: 0}
-<<<<<<< HEAD
-  m_RootOrder: 21
-=======
   m_RootOrder: 22
->>>>>>> ad132785d503a107fcaabd46958bfab636a00aa1
   m_LocalEulerAnglesHint: {x: -0.979, y: 90, z: 0}
 --- !u!114 &1563469498
 MonoBehaviour:
@@ -8149,11 +8140,7 @@ RectTransform:
   - {fileID: 289370859}
   - {fileID: 1934670410}
   m_Father: {fileID: 0}
-<<<<<<< HEAD
-  m_RootOrder: 4
-=======
   m_RootOrder: 3
->>>>>>> ad132785d503a107fcaabd46958bfab636a00aa1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
