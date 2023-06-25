@@ -41,9 +41,6 @@ public class SoundControls : MonoBehaviour
     void Start()
     {
 
-        //backgroundSource.clip = backgroundClip;
-        //backgroundSource.loop = true;
-       // backgroundSource.Play();
 
     }
 
