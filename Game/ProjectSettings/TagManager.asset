@@ -11,6 +11,9 @@ TagManager:
   - ShowOnFinish
   - Clock
   - TeleportTrigger
+  - Human
+  - Mohammad
+  - Jojo
   layers:
   - Default
   - TransparentFX

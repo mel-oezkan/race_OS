@@ -15,7 +15,7 @@ public class Clock : MonoBehaviour
     private void Start()
     {
         // Hide the clock text initially
-        clockText.gameObject.SetActive(false);
+        clockText.gameObject.SetActive(true);
     }
 
 
@@ -43,15 +43,20 @@ public class Clock : MonoBehaviour
         soundControls.playSound("clock");
         timer.ClockReducesTime();
 
-        clockText.gameObject.SetActive(false);
+        clockText.gameObject.SetActive(true);
         //clockText.text = "Clock Collected!";
-        //HideText();
+        StartCoroutine(HideClockText());
 
         //Invoke("HideClockText", clockTextDuration);
     }
 
-
-
-
-
+    private IEnumerator HideClockText()
+    {
+        Debug.Log("hi");
+        //clockText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        Debug.Log("b");
+        clockText.gameObject.SetActive(false);
+        Debug.Log("c");
+    }
 }
