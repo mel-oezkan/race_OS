@@ -16,6 +16,8 @@ public class SoundControls : MonoBehaviour
 
     [SerializeField] private AudioSource clockSource;
 
+    [SerializeField] private AudioSource HumanSource;
+
 
     [SerializeField] private AudioClip accelerationClip;
 
@@ -32,6 +34,12 @@ public class SoundControls : MonoBehaviour
     [SerializeField] private AudioClip gameMusicClip;
 
     [SerializeField] private AudioClip clockClip;
+
+    [SerializeField] private AudioClip JojoClip;
+
+    //[SerializeField] private AudioClip MelihClip;
+
+    //[SerializeField] private AudioClip MohammadClip;
 
 
 
@@ -78,6 +86,10 @@ public class SoundControls : MonoBehaviour
         else if (clipName == "clock")
         {
             clockSource.PlayOneShot(clockClip);
+        }
+        else if (clipName == "jojo")
+        {
+            clockSource.PlayOneShot(JojoClip);
         }
     }
 

@@ -63,7 +63,7 @@ public class FinishLine : MonoBehaviour
             imageBad.ShowImage();
             soundControls.playSound("bad");
         }
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         HideImage(); // Call a method to hide the image
     }
 
