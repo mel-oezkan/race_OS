@@ -106,8 +106,8 @@ public class CarPhysics : MonoBehaviour
         Vector3 tireWorldVel = rb.GetPointVelocity(trans.position);
 
         float steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
-        // float tireGripFactor = gripCurve.Evaluate(Mathf.Abs(steeringVel)); 
-        float tireGripFactor = 0.10f;
+        Debug.Log(steeringVel);
+        float tireGripFactor = gripCurve.Evaluate(Mathf.Abs(steeringVel)); 
 
         float desiredChange = -steeringVel * tireGripFactor;
         float desiredAccel = desiredChange / Time.fixedDeltaTime;
@@ -160,17 +160,17 @@ public class CarPhysics : MonoBehaviour
             Vector3 accelerationForce = accelDir * availableTorque ;
 
             // calculate the steering angle
-            float steeringAngle = steerInput * maxSteeringAngle;
+            float steeringSensitivity = 0.5f; // Adjust the sensitivity as needed
+            float clampedSteeringAngle = Mathf.Clamp(steerInput * maxSteeringAngle, -30, 30);
+            float steeringAngle = clampedSteeringAngle * steeringSensitivity;
+
             Debug.Log(steeringAngle);
             Vector3 steeringForce = steeringDir  * steeringAngle;
-            Vector3 test = Vector3.Project(
-                accelerationForce,
-                (accelerationForce + steeringForce.normalized)
-            ).normalized;
-
+            Vector3 totalForce = accelDir * availableTorque + steeringDir * steeringAngle;
+           
             // Vector3 foreceProjection = Vector3.Project(accelerationForce, combinedForce).normalized;
             rb.AddForceAtPosition(
-                (test * carTopSpeed ),
+                totalForce * carTopSpeed ,
                 trans.position
             );
 
