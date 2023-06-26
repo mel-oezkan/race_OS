@@ -38,7 +38,7 @@ public class Clock : MonoBehaviour
     {
         soundControls.playSound("clock");
         timer.ClockReducesTime();
-        clockText.text = "-4 sec";
+        clockText.text = "-10 sec";
         StartCoroutine(HideClockText());
     }
 

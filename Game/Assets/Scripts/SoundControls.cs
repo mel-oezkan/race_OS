@@ -23,7 +23,7 @@ public class SoundControls : MonoBehaviour
     [SerializeField] private AudioClip gameMusicClip;
     [SerializeField] private AudioClip clockClip;
     [SerializeField] private AudioClip jojoClip;
-    //[SerializeField] private AudioClip MelihClip;
+    [SerializeField] private AudioClip melihClip;
     [SerializeField] private AudioClip mohammadClip;
 
     // Function that plays a specific sound clip based on the provided clipName variable
@@ -66,6 +66,10 @@ public class SoundControls : MonoBehaviour
             clockSource.PlayOneShot(jojoClip);
         }
         else if (clipName == "mohammad")
+        {
+            clockSource.PlayOneShot(mohammadClip);
+        }
+        else if (clipName == "melih")
         {
             clockSource.PlayOneShot(mohammadClip);
         }

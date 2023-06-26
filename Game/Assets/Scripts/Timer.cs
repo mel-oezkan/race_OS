@@ -62,6 +62,6 @@ public class Timer : MonoBehaviour
 
     public void ClockReducesTime()
     {
-        _startTime += 4f; // Increase the start time by 4 seconds when the clock reduces time (used in Clock script)
+        _startTime += 10f; // Increase the start time by 4 seconds when the clock reduces time (used in Clock script)
     }
 }
