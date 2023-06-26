@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -57,6 +58,17 @@ public class UIManager : MonoBehaviour
     public void Reload()
     {
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void QuitButton()
+    {
+        #if UNITY_EDITOR
+                // Code to handle quitting in the Unity Editor (optional)
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                // Code to handle quitting in a built version
+                Application.Quit();
+        #endif
     }
 
     //Controls the pausing of the scene

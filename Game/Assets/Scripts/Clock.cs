@@ -14,11 +14,7 @@ public class Clock : MonoBehaviour
     //Collision event
     public event System.Action OnClockCollision; // Event to be invoked when the car collides with a clock
 
-    private void Start()
-    {
-        // Hide the clock text initially
-        clockText.gameObject.SetActive(false);
-    }
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -31,8 +27,8 @@ public class Clock : MonoBehaviour
             // Invoke the OnClockCollision event
             OnClockCollision?.Invoke();
 
-            // Disable the clock object
-            gameObject.SetActive(false);
+            // Move the location of the clock object so that it is not visible anymore
+            gameObject.transform.position = new Vector3(0, -100, 0);
         }
     }
 
@@ -40,25 +36,15 @@ public class Clock : MonoBehaviour
 
     private void HandleClockCollision()
     {
-        // Add your desired actions to be invoked when the car collides with a clock
-        Debug.Log("Car collided with a clock!");
         soundControls.playSound("clock");
         timer.ClockReducesTime();
-
-        clockText.gameObject.SetActive(true);
-        //clockText.text = "Clock Collected!";
+        clockText.text = "-4 sec";
         StartCoroutine(HideClockText());
-
-        //Invoke("HideClockText", clockTextDuration);
     }
 
     private IEnumerator HideClockText()
     {
-        Debug.Log("hi");
-        //clockText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(4f);
-        Debug.Log("b");
-        clockText.gameObject.SetActive(false);
-        Debug.Log("c");
+        yield return new WaitForSeconds(2f);
+        clockText.text = "";
     }
 }

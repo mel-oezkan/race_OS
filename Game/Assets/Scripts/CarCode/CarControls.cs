@@ -7,7 +7,7 @@ public class CarControls : MonoBehaviour
 {
     [SerializeField] private SoundControls soundControls;
     [SerializeField] private Rigidbody carRB;
-    [SerializeField] private PauseScript pauseScript;
+    [SerializeField] private Pause pause;
 
     public WheelColliders colliders;
     public WheelTransforms wheelTransforms;
@@ -32,7 +32,7 @@ public class CarControls : MonoBehaviour
 
     // Debug values
 
-    public bool isFinished = false; // Flag to indicate if the car has finished
+    public bool _isFinished = false; // Flag to indicate if the car has finished
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class CarControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPaused || isFinished) // Check if the car is paused or finished
+        if (isPaused || _isFinished) // Check if the car is paused or finished
             return;
 
         speed = carRB.velocity.magnitude;
@@ -129,7 +129,6 @@ public class CarControls : MonoBehaviour
         {
             Debug.Log("Escape pressed");
             Debug.Log("Closest Node: " + GetClosesNode().ToString());
-            // PauseScript.Setup();
         }
     }
 
@@ -252,7 +251,7 @@ public class CarControls : MonoBehaviour
 
     public void StopMovement()
     {
-        isFinished = true; // Set the isFinished flag to true
+        _isFinished = true; // Set the isFinished flag to true
         forwardInput = 0f;
         steeringInput = 0f;
         brakeInput = 1f;
