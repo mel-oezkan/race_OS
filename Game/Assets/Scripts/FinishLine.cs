@@ -5,49 +5,46 @@ using UnityEngine.UI;
 
 public class FinishLine : MonoBehaviour
 {
+    //References
     [SerializeField] private SoundControls soundControls;
-    public UIManager uiManager;
-
-    //public event System.Action OnCarPassedFinishLine; // Event to be invoked when the car passes the finish line
-
-    public CarControls carControls; // Reference to the CarControls script
-    public Timer timer;
-    public ImageGood imageGood;
-    public ImageNaja imageNaja;
-    public ImageBad imageBad;
-    public List<Sprite> images; // List of image sprites
-    public bool isFinished = false;
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private CarControls carControls;
+    [SerializeField] private Timer timer;
+    [SerializeField] private ImageGood imageGood;
+    [SerializeField] private ImageNaja imageNaja;
+    [SerializeField] private ImageBad imageBad;
+    
     public Button restart;
 
+    //Variable
+    private float _imageDelay = 1f;
+    //Boolean Variable
+    public bool _isFinished = false;
 
 
-    private float imageDelay = 1f;
-
-    //public event System.Action OnFinishEvent; // Event to be invoked when the car passes the finish line
-
+    //Specifies what happens when car passes finish line
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // Other logic for finishing the level or triggering events
-            carControls.StopMovement();
+            carControls.StopMovement(); 
             timer.StopTimer();
             StartCoroutine(ShowImageCoroutine());
             soundControls.gameMusicStop();
             soundControls.backgroundMotorStop();
             soundControls.clipStop();
-            uiManager.isFinished = true;
+            uiManager._isFinished = true;
         }
     }
 
-
+    //Assigns images and sounds to certain time intervals showing the images for 3sec
     private IEnumerator ShowImageCoroutine()
     {
-        yield return new WaitForSeconds(imageDelay);
+        yield return new WaitForSeconds(_imageDelay);
 
-        float elapsedTime = timer.GetElapsedTime(); // Get the elapsed time from the Timer class
+        float elapsedTime = timer.GetElapsedTime(); // Get the elapsed time from the timer script
 
-        Debug.Log(elapsedTime);
+        //Specifies which image and sound is played after how much time
         if (elapsedTime < 3f)
         {
             imageGood.ShowImage();
@@ -63,13 +60,13 @@ public class FinishLine : MonoBehaviour
             imageBad.ShowImage();
             soundControls.playSound("bad");
         }
-        yield return new WaitForSeconds(3f);
-        HideImage(); // Call a method to hide the image
+        yield return new WaitForSeconds(3f); //Delays call of the following function
+        HideImage(); // Calls a method to hide the images
     }
 
+    //Hides the images
     private void HideImage()
     {
-        // Add the necessary code to hide the image
         imageGood.HideImage();
         imageNaja.HideImage();
         imageBad.HideImage();

@@ -6,16 +6,18 @@ using TMPro;
 
 public class Clock : MonoBehaviour
 {
+    //References
     [SerializeField] private SoundControls soundControls;
     [SerializeField] private Timer timer;
     [SerializeField] private TextMeshProUGUI clockText;
-    [SerializeField] private float clockTextDuration = 2f;
+
+    //Collision event
     public event System.Action OnClockCollision; // Event to be invoked when the car collides with a clock
 
     private void Start()
     {
         // Hide the clock text initially
-        clockText.gameObject.SetActive(true);
+        clockText.gameObject.SetActive(false);
     }
 
 

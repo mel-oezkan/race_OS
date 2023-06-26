@@ -6,20 +6,10 @@ using UnityEngine.Events;
 
 public class CarController : MonoBehaviour
 {
+    //References
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private CountdownTimer countdownTimer;
     [SerializeField] private FinishLine finishLine;
-
-
-    private const string HORIZONTAL = "Horizontal";
-    private const string VERTICAL = "Vertical";
-
-    private float horizontalInput;
-    private float verticalInput;
-    private float currentBrakeForce;
-    private float currentSteerAngle;
-    private bool isBreaking;
-    private bool canMove;
 
     [SerializeField] private float motorForce;
     [SerializeField] private float breakForce;
@@ -34,6 +24,19 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform frontRightTransform;
     [SerializeField] private Transform backLeftTransform;
     [SerializeField] private Transform backRightTransform;
+
+    //Variables
+    private const string HORIZONTAL = "Horizontal";
+    private const string VERTICAL = "Vertical";
+
+    private float horizontalInput;
+    private float verticalInput;
+    private float currentBrakeForce;
+    private float currentSteerAngle;
+    private bool isBreaking;
+    private bool canMove;
+
+
 
     private void Start()
     {

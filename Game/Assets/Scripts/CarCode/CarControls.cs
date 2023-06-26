@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class CarControls : MonoBehaviour
 {
     [SerializeField] private SoundControls soundControls;
+    [SerializeField] private Rigidbody carRB;
+    [SerializeField] private PauseScript pauseScript;
 
-    public Rigidbody carRB;
-    public PauseScript PauseScript;
     public WheelColliders colliders;
     public WheelTransforms wheelTransforms;
 
@@ -259,13 +259,7 @@ public class CarControls : MonoBehaviour
         ApplyMotorForce();
         ApplyBreak();
     }
-    public void StartMovement()
-    {
-        isFinished = false; // Reset the isFinished flag to false
-        forwardInput = 1f; // Set the forward input to start moving forward
-        steeringInput = 0f; // Reset the steering input
-        brakeInput = 0f; // Reset the brake input
-    }
+
 }
 
 [System.Serializable]

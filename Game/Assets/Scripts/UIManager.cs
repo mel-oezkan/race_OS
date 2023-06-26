@@ -1,31 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class UIManager : MonoBehaviour
 {
+    //References
     public CarControls carControls;
     public FinishLine finishLine;
+
+    //Variables
+    //Boolean Variables
+    public bool _isFinished = false;
+    //Array Variables
     GameObject[] pauseObjects;
     GameObject[] finishObjects;
-    public bool isFinished = false;
 
-    // Use this for initialization
+    // Initialization 
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1;          //Marker that differenciates between paused and not paused
 
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");            //gets all objects with tag ShowOnPause
         finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");          //gets all objects with tag ShowOnFinish
 
-        hidePaused();
-        hideFinished();
+        hidePaused();            //Hides the pause menu
+        hideFinished();          //Hides the finish menu
     }
 
-    // Update is called once per frame
+    //defined the p button to pause and unpause the game
     void Update()
     {
-        //uses the p button to pause and unpause the game
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (Time.timeScale == 1)
@@ -40,8 +46,8 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        //shows finish gameobjects if player is dead and timescale = 0
-        if (isFinished == true)
+        //shows finish menu if isFinished is true (which is the case when the car passed the finish line)
+        if (_isFinished == true)
         {
             showFinished();
         }
@@ -53,7 +59,7 @@ public class UIManager : MonoBehaviour
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    //controls the pausing of the scene
+    //Controls the pausing of the scene
     public void pauseControl()
     {
         if (Time.timeScale == 1)
@@ -68,7 +74,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //shows objects with ShowOnPause tag
+    //Shows objects with ShowOnPause tag
     public void showPaused()
     {
         foreach (GameObject g in pauseObjects)
@@ -77,7 +83,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //hides objects with ShowOnPause tag
+    //Hides objects with ShowOnPause tag
     public void hidePaused()
     {
         foreach (GameObject g in pauseObjects)
@@ -86,7 +92,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //hides objects with ShowOnFinish tag
+    //Hides objects with ShowOnFinish tag
     public void hideFinished()
     {
         foreach (GameObject g in finishObjects)
@@ -95,7 +101,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //shows objects with ShowOnFinish tag
+    //Shows objects with ShowOnFinish tag
     public void showFinished()
     {
         StartCoroutine(ShowFinishedCoroutine());
@@ -111,7 +117,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //loads inputted level
+    //Loads inputted level
     public void LoadLevel(string level)
     {
         Application.LoadLevel(level);
