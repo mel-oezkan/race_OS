@@ -6,21 +6,21 @@ public class CountdownTimer : MonoBehaviour
 {
     [SerializeField] private SoundControls soundControls;
 
+    [SerializeField] private float countdownDuration = 3f; // Duration of the countdown in seconds
+    [SerializeField] private TextMeshProUGUI countdownText; // Reference to the countdown text component
+    
     public delegate void CountdownFinishedDelegate();
     public event CountdownFinishedDelegate OnCountdownFinished; // Event declaration
-
-    public float countdownDuration = 3f; // Duration of the countdown in seconds
-    public TextMeshProUGUI countdownText; // Reference to the countdown text component
 
     public bool canMove = false; // Flag to enable movement when countdown reaches "GO"
 
     private float currentCountdownValue;
-
-    public CarControls carControls; // Reference to the CarController script
+    [SerializeField] private CarControls carControls; // Reference to the CarController script
 
     private void Start()
     {
         StartCountdown();
+        
         soundControls.playSound("gameMusic");
         soundControls.playSound("countdown");
     }
@@ -29,7 +29,7 @@ public class CountdownTimer : MonoBehaviour
     {
         // Reinitalize the current countdown value as the 
         // predefined countdown duration
-        currentCountdownValue = countdownDuration;
+        currentCountdownValue = countdownDuration ? countdownDuration : 3f;
 
         // Update the countdown text and start
         // the countdown coroutine
