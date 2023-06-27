@@ -7,7 +7,6 @@ public class CarControls : MonoBehaviour
 {
     [SerializeField] private SoundControls soundControls;
     [SerializeField] private Rigidbody carRB;
-    [SerializeField] private Pause pause;
 
     public WheelColliders colliders;
     public WheelTransforms wheelTransforms;
