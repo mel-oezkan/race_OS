@@ -11,7 +11,7 @@ public class SoundControls : MonoBehaviour
     [SerializeField] private AudioSource countdownSource;
     [SerializeField] private AudioSource gameMusicSource;
     [SerializeField] private AudioSource clockSource;
-    [SerializeField] private AudioSource HumanSource;
+    [SerializeField] private AudioSource humanSource;
 
     //Audio Clips
     [SerializeField] private AudioClip accelerationClip;
@@ -63,15 +63,15 @@ public class SoundControls : MonoBehaviour
         }
         else if (clipName == "jojo")
         {
-            clockSource.PlayOneShot(jojoClip);
+            humanSource.PlayOneShot(jojoClip);
         }
         else if (clipName == "mohammad")
         {
-            clockSource.PlayOneShot(mohammadClip);
+            humanSource.PlayOneShot(mohammadClip);
         }
         else if (clipName == "melih")
         {
-            clockSource.PlayOneShot(mohammadClip);
+            humanSource.PlayOneShot(melihClip);
         }
     }
 
