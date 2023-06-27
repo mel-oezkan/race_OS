@@ -84,6 +84,49 @@ public class CarPhysics : MonoBehaviour
         }
     }
 
+
+    void HandleDrag() {
+        // apply the drag if car is not in motion
+        if (_steerInput == 0 && _accelInput == 0) {
+            UpdateDrag(wheelTransforms.fLWheel);
+            UpdateDrag(wheelTransforms.fRWheel);
+            UpdateDrag(wheelTransforms.bLWheel);
+            UpdateDrag(wheelTransforms.bRWheel);
+        }
+    }
+
+    void HandleSuspension() {
+        UpdateSuspension(wheelTransforms.fLWheel);
+        UpdateSuspension(wheelTransforms.fRWheel);
+        UpdateSuspension(wheelTransforms.bRWheel);
+        UpdateSuspension(wheelTransforms.bLWheel);
+    }
+
+    void HandleSteering () {
+
+        RaycastHit tireRay;       
+        bool rayDidHit = Physics.Raycast(
+            transform.position, -transform.up, out tireRay, _restSupensionLen);
+        
+        // checking for every individual tire caused some bugs since
+        // one wheel can add resistance while one is minimally to far up       
+        if (rayDidHit) {
+            // handle front tires
+            UpdateSteering(wheelTransforms.fRWheel, fontTireGrip);
+            UpdateSteering(wheelTransforms.fLWheel, fontTireGrip);        
+
+            // handle rear tires
+            UpdateSteering(wheelTransforms.bRWheel, rearTireGrip);
+            UpdateSteering(wheelTransforms.bLWheel, rearTireGrip);        
+        }
+    }
+
+
+    void HandleAcceleration () {
+        UpdateAcceleration(wheelTransforms.fLWheel);
+        UpdateAcceleration(wheelTransforms.fRWheel);
+    }
+
     void UpdateSuspension(Transform trans) {
         RaycastHit tireRay;       
         bool rayDidHit = Physics.Raycast(
@@ -119,12 +162,6 @@ public class CarPhysics : MonoBehaviour
         }
     }
 
-    void HandleSuspension() {
-        UpdateSuspension(wheelTransforms.fRWheel);
-        UpdateSuspension(wheelTransforms.fLWheel);
-        UpdateSuspension(wheelTransforms.bRWheel);
-        UpdateSuspension(wheelTransforms.bLWheel);
-    }
 
     void UpdateSteering (
         Transform trans, 
@@ -135,7 +172,6 @@ public class CarPhysics : MonoBehaviour
         Vector3 tireWorldVel = rb.GetPointVelocity(trans.position);
 
         float steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
-        Debug.Log(steeringVel);
         float tireGripFactor = gripCurve.Evaluate(Mathf.Abs(steeringVel)); 
 
         float desiredChange = -steeringVel * tireGripFactor;
@@ -147,28 +183,16 @@ public class CarPhysics : MonoBehaviour
 
         Debug.DrawLine(
             trans.position,
-            trans.position + (steeringDir * desiredAccel * tireMass),
+            trans.position + steeringDir * desiredAccel , // (steeringDir * desiredAccel * tireMass),
             Color.red);
+
+        Debug.DrawLine(
+            trans.position,
+            trans.position + (steeringDir * steeringVel),
+            Color.white);
     }
 
-    void HandleSteering () {
-
-        RaycastHit tireRay;       
-        bool rayDidHit = Physics.Raycast(
-            transform.position, -transform.up, out tireRay, _restSupensionLen);
-        
-        // checking for every individual tire caused some bugs since
-        // one wheel can add resistance while one is minimally to far up       
-        if (rayDidHit) {
-            // handle front tires
-            UpdateSteering(wheelTransforms.fRWheel, fontTireGrip);
-            UpdateSteering(wheelTransforms.fLWheel, fontTireGrip);        
-
-            // handle rear tires
-            UpdateSteering(wheelTransforms.bRWheel, rearTireGrip);
-            UpdateSteering(wheelTransforms.bLWheel, rearTireGrip);        
-        }
-    }
+    
 
     void UpdateAcceleration(Transform trans) {
         RaycastHit tireRay;       
@@ -209,10 +233,6 @@ public class CarPhysics : MonoBehaviour
         }
     }
 
-    void HandleAcceleration () {
-        UpdateAcceleration(wheelTransforms.fLWheel);
-        UpdateAcceleration(wheelTransforms.fRWheel);
-    }
 
     void UpdateDrag(Transform trans) {
         // gets the velocity of the tire and reduces by some factor
@@ -222,16 +242,23 @@ public class CarPhysics : MonoBehaviour
             trans.position
         );
     }
+}
 
-    void HandleDrag() {
-        // apply the drag if car is not in motion
-        if (_steerInput == 0 && _accelInput == 0) {
-            UpdateDrag(wheelTransforms.fLWheel);
-            UpdateDrag(wheelTransforms.fRWheel);
-            UpdateDrag(wheelTransforms.bLWheel);
-            UpdateDrag(wheelTransforms.bRWheel);
-        }
-    }
 
-    
+[System.Serializable]
+public class WheelColliders
+{
+    public WheelCollider fRWheel;
+    public WheelCollider fLWheel;
+    public WheelCollider bRWheel;
+    public WheelCollider bLWheel;
+}
+
+[System.Serializable]
+public class WheelTransforms
+{
+    public Transform fRWheel;
+    public Transform fLWheel;
+    public Transform bRWheel;
+    public Transform bLWheel;
 }

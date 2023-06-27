@@ -260,20 +260,4 @@ public class CarControls : MonoBehaviour
 
 }
 
-[System.Serializable]
-public class WheelColliders
-{
-    public WheelCollider fRWheel;
-    public WheelCollider fLWheel;
-    public WheelCollider bRWheel;
-    public WheelCollider bLWheel;
-}
 
-[System.Serializable]
-public class WheelTransforms
-{
-    public Transform fRWheel;
-    public Transform fLWheel;
-    public Transform bRWheel;
-    public Transform bLWheel;
-}
