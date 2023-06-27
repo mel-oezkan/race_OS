@@ -11,8 +11,8 @@ public class MelihObstacle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //Plays the respective voice recording of Mohammad
-            soundControls.playSound("melih");
+            //Plays the respective voice recording of Melih
+            
 
             // Invoke the OnClockCollision event
             OnMohammadCollision?.Invoke();
@@ -21,10 +21,12 @@ public class MelihObstacle : MonoBehaviour
             Transform objectTransform = gameObject.transform;
 
             // Rotates the gameobject, so that it looks like it falls down
-            float newRotationAngle = 90f; // Specify the angle in degrees
+            float newRotationAngle = 90f; 
             Vector3 newRotation = objectTransform.rotation.eulerAngles;
             newRotation.z = newRotationAngle;
             objectTransform.rotation = Quaternion.Euler(newRotation);
+
+            soundControls.playSound("melih");
         }
     }
 }
