@@ -2,16 +2,16 @@
 ## Functionalities
 As simple racing game in parts of Osnabrück.
 
-A start menu offers the possibility to start the game by clicking a button.
+A start menu offers the possibility to start the game by clicking a button or to quit the game with another button.
 After a countdown with matching sound counts down to zero, the car can be moved. You can move left, right, forwards ...
 Background music is played during the race. Engine sounds are also part of the game. One sound represents the acceleration of the engine, it is played while moving forward and when the sound is not already playing. It stops when the car is not moving forward. A second sound represents the general engine sound and is always played when the car is moving.
 Both engine sounds stop when the car crosses the finish line or when the car stops moving.
-Pressing 'p' brings up the 'Pause' menu. Here the player can choose between 'Play' and 'Restart'. Play' continues the game and 'Restart' restarts the game at the countdown.
+Pressing 'p' brings up the 'Pause' menu. Here the player can choose between 'Play', 'Quit' and 'Restart'. 'Play' continues the game, 'Quit' quitts the game and 'Restart' restarts the game at the countdown.
 There are several items scattered along the way.
-One of them is a clock. A collision with it reduces the time to four seconds. It makes a bing sound and the clock disappears. To inform the player about the function of the clock, a text will be displayed saying '-4 sec'.
+One of them is a clock. A collision with it reduces the time to ten seconds. It makes a bing sound and the clock disappears. To inform the player about the function of the clock, a text will be displayed saying '-10 sec'.
 A second item is...
-Figures representing us (Melih, Johanna, Mohammad) are placed along the road. When the car runs over them, each character shouts in our voice and the car slows down.
-Finally, the driver reaches the finish line. Depending on the time, a certain sound and an appropriate image are displayed. Images and sounds are classified as good, naja (neutral) and bad. After that a 'Game Over' menu is displayed. It offers the option to restart the game.
+Figures representing us (Melih, Johanna, Mohammad) are placed along the road. When the car runs over them, each character shouts in our voices and the car slows down.
+Finally, the driver reaches the finish line. Depending on the time, a certain sound and an appropriate image are displayed. Images and sounds are classified as good, naja (neutral) and bad. After that a 'Game Over' menu is displayed. It offers the option to restart or quit the game.
 
 
 ## Todos
