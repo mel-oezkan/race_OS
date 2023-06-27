@@ -1,6 +1,18 @@
 # race_OS
+## Functionalities
+As simple racing game in parts of Osnabrück.
 
-As simple racing game in parts of Osnabrück
+A start menu offers the possibility to start the game by clicking a button or to quit the game with another button.
+After a countdown with matching sound counts down to zero, the car can be moved. You can move left, right, forwards ...
+Background music is played during the race. Engine sounds are also part of the game. One sound represents the acceleration of the engine, it is played while moving forward and when the sound is not already playing. It stops when the car is not moving forward. A second sound represents the general engine sound and is always played when the car is moving.
+Both engine sounds stop when the car crosses the finish line or when the car stops moving.
+Pressing 'p' brings up the 'Pause' menu. Here the player can choose between 'Play', 'Quit' and 'Restart'. 'Play' continues the game, 'Quit' quitts the game and 'Restart' restarts the game at the countdown.
+There are several items scattered along the way.
+One of them is a clock. A collision with it reduces the time to ten seconds. It makes a bing sound and the clock disappears. To inform the player about the function of the clock, a text will be displayed saying '-10 sec'.
+A second item is...
+Figures representing us (Melih, Johanna, Mohammad) are placed along the road. When the car runs over them, each character shouts in our voices and the car slows down.
+Finally, the driver reaches the finish line. Depending on the time, a certain sound and an appropriate image are displayed. Images and sounds are classified as good, naja (neutral) and bad. After that a 'Game Over' menu is displayed. It offers the option to restart or quit the game.
+
 
 ## Todos
 
@@ -46,9 +58,15 @@ As simple racing game in parts of Osnabrück
 -   Functioning Car Physics
     -   14.06
         -   Car is not steering right. It pushesh the car into a direction with a too large force
-        -   car is just drifting right and left. going straight seems no easy task
-        -   when driving backwards the car takes ages to go back straight again
-        -   debugging of the backwards driving is also a nightmare because the camera is not tracking the car correctly. It takes to long to move behind the car and thus makes it unpossible to test the driving. But also increasing the speed of the camera causes the view to "wobble"
+        -   Car is just drifting right and left. going straight seems no easy task
+        -   When driving backwards the car takes ages to go back straight again
+        -   Debugging of the backwards driving is also a nightmare because the camera is not tracking the car correctly. It takes to long to move behind the car and thus makes it unpossible to test the driving. But also increasing the speed of the camera causes the view to "wobble"
+- At high speed the items/obstacles did not make any sound -> Increasing the Min. Distance in the Audio Source setting caused the sound attenuation  to start later
+- When car was set as trigger in collider component, it started to move continuously and uncontrollable -> instead we used event system, which allowed to set only collision object as trigger
+- Integration of time delays -> StartCoroutine > IEnumerator
+- Lighting problem when integrating the menu: using the start menu to switch to the game scene results in a game scene without light -> Unity automatically adjusts the menu scene lighting settings (no light) to the game scene. We had to adjust these settings individually to avoid this problem.
+- Keeping track of all details (is it tagged, is the trigger set in the collision component, are all scripts attached, are all relevant scripts referenced)
+
 
 ## Grading Scheme
 
