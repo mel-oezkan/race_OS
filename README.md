@@ -1,5 +1,5 @@
 # race_OS
-
+## Functionalities
 As simple racing game in parts of Osnabrück.
 
 A start menu offers the possibility to start the game by clicking a button.
@@ -61,11 +61,11 @@ Finally, the driver reaches the finish line. Depending on the time, a certain so
         -   Car is just drifting right and left. going straight seems no easy task
         -   When driving backwards the car takes ages to go back straight again
         -   Debugging of the backwards driving is also a nightmare because the camera is not tracking the car correctly. It takes to long to move behind the car and thus makes it unpossible to test the driving. But also increasing the speed of the camera causes the view to "wobble"
-- At high high speed, the items/obstacles stopped making a sound -> increase of Min. Distance in Audio Source setting produced that sound attenuation started later
-- When car was set as a trigger in the collider component it started to move continously and uncontrollable -> instead we used event system, allowing to only set the collision object as trigger
-- The incorporation of time delays -> StartCoroutine > IEnumerator
-- Lightning problem while integretation of menu: using the start menu to change to the game scene results in a game scene without light -> Unity automatically matches the menu scene lightning settings (no light) to the game scene. We had to individually adjust these settings to avoid this problem.
-- Keeping track of all the details (is it tagged, is the trigger set in the collision component, are all scripts attached, are all relevant scripts referenced)
+- At high speed the items/obstacles did not make any sound -> Increasing the Min. Distance in the Audio Source setting caused the sound attenuation  to start later
+- When car was set as trigger in collider component, it started to move continuously and uncontrollable -> instead we used event system, which allowed to set only collision object as trigger
+- Integration of time delays -> StartCoroutine > IEnumerator
+- Lighting problem when integrating the menu: using the start menu to switch to the game scene results in a game scene without light -> Unity automatically adjusts the menu scene lighting settings (no light) to the game scene. We had to adjust these settings individually to avoid this problem.
+- Keeping track of all details (is it tagged, is the trigger set in the collision component, are all scripts attached, are all relevant scripts referenced)
 
 
 ## Grading Scheme
