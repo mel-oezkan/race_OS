@@ -18,6 +18,7 @@ public class CountdownTimer : MonoBehaviour
     // Variables
     private float _currentCountdownValue;
     public float _countdownDuration = 3f;
+
     // Boolean Variables
     public bool _canMove = false; // Flag to enable movement when countdown reaches "GO"
 
@@ -70,9 +71,6 @@ public class CountdownTimer : MonoBehaviour
 
         // Hide the countdown text or perform any other desired action
         countdownText.gameObject.SetActive(false);
-
-        // Enable the car's movement
-        //_canMove = true;
     }
 
     //This function enables movement in line with the end of the countdown
