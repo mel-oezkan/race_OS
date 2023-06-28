@@ -39,6 +39,7 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private AnimationCurve steeringCurve;
     [SerializeField] private bool isBoostEnabled = false;
     
+    [SerializeField] ParticleSystem _turboparticle;
 
      // Start is called before the first frame update
     void Start()
@@ -49,24 +50,40 @@ public class CarPhysics : MonoBehaviour
     
     public void Update()
     {
-        // Turbo boost
+        // Turbo boost and its effect
         if(Input.GetKeyDown(KeyCode.Q))
         {
             if(!isBoostEnabled)
             {
                 isBoostEnabled = true;
-                _speedmultiplier = 100f;
+                _speedmultiplier = 3f;
                 Debug.Log("Boost enabled");
-            }
-            else if(isBoostEnabled)
-            {
-                isBoostEnabled = false;
+                _turboparticle.startSpeed = 10f;
+                _turboparticle.Play();
+                DoDelay(1f, () =>
+               {
+            Debug.Log("Delay complete!");
+            isBoostEnabled = false;
                 Debug.Log("Boost disabled");
                 _accelInput = 0f;
                 _speedmultiplier = 1f;
+                _turboparticle.Stop();
+               }
+               );
             }
         }
         
+    }
+      void DoDelay(float delayTime, System.Action callback)
+    {
+        StartCoroutine(DelayCoroutine(delayTime, callback));
+    }
+
+    IEnumerator DelayCoroutine(float delayTime, System.Action callback)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        callback?.Invoke();
     }
 
     void FixedUpdate()
