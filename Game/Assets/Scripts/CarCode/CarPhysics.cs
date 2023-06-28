@@ -221,12 +221,11 @@ public class CarPhysics : MonoBehaviour
             float vel = Vector3.Dot(springDir, tireWorldVel);
             float force = (offset * _springStrength) - (vel * _springDamper);
 
-
             Debug.DrawLine(
                 trans.position,
                 trans.position + (vel * springDir),
                 Color.green);
-
+            
             rb.AddForceAtPosition(
                 (springDir * force), 
                 trans.position);
