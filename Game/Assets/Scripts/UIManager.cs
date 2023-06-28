@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     //References
-    public CarControls carControls;
-    public FinishLine finishLine;
+    [SerializeField] private FinishLine finishLine;
 
     //Variables
     //Boolean Variables

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class MelihObstacle : MonoBehaviour
 {
+    //References
     [SerializeField] private SoundControls soundControls;
+    [SerializeField] private CarPhysics carPhysics;
+
+    // Collision Event
     public event System.Action OnMohammadCollision; // Event to be invoked when the car collides with a clock
 
     private void OnTriggerEnter(Collider other)
@@ -12,7 +16,7 @@ public class MelihObstacle : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //Plays the respective voice recording of Melih
-            
+            soundControls.playSound("melih");
 
             // Invoke the OnClockCollision event
             OnMohammadCollision?.Invoke();
@@ -26,7 +30,9 @@ public class MelihObstacle : MonoBehaviour
             newRotation.z = newRotationAngle;
             objectTransform.rotation = Quaternion.Euler(newRotation);
 
-            soundControls.playSound("melih");
+            //Reduces the speed 
+            carPhysics.ReduceSpeed(0.25f, 4f);
+
         }
     }
 }

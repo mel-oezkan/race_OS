@@ -5,6 +5,9 @@ using UnityEngine;
 public class CarPhysics : MonoBehaviour
 {
 
+    [SerializeField] private SoundControls soundControls;
+    [SerializeField] private CountdownTimer countdownTimer;
+
     // car specific variables
     [SerializeField] private Transform[] tireTransform = new Transform[4];
     [SerializeField] private WheelTransforms wheelTransforms;
@@ -22,11 +25,13 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private float _accelInput = 0f; // forward backward input
 
     // handles the parameters for the car steering forces
-    [SerializeField] private float maxSteeringAngle = 30f;
+    //[SerializeField] private float maxSteeringAngle = 30f;
     [SerializeField] private float tireMass = 10f;
 
     // other params
     private float _dragFactor = -0.1f;
+    public bool _isFinished = false;
+    private bool _canMove = false;
 
     [SerializeField] private AnimationCurve powerCurve;
     [SerializeField] private AnimationCurve fontTireGrip;
@@ -40,6 +45,7 @@ public class CarPhysics : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        countdownTimer.OnCountdownFinished += EnableMovement;
     }
     
     public void Update()
@@ -68,13 +74,18 @@ public class CarPhysics : MonoBehaviour
     {
         _steerInput = Input.GetAxis("Horizontal");
         _accelInput = Input.GetAxis("Vertical");
-        
-        HandleSuspension();
-        HandleSteering();
-        HandleAcceleration();
-        HandleDrag();
 
-        for (int i = 0; i < 4; i++) {
+        if (countdownTimer._canMove && !_isFinished)
+        {
+            // Handle movement only if the countdown has reached "GO"
+            HandleSuspension();
+            HandleSteering();
+            HandleAcceleration();
+            HandleDrag();
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
             Vector3 tireWorldVel = rb.GetPointVelocity(tireTransform[i].position);
 
             Debug.DrawLine(
@@ -82,6 +93,64 @@ public class CarPhysics : MonoBehaviour
                 tireTransform[i].position + tireWorldVel,
                 Color.yellow);
         }
+
+        // Motor Sounds
+        if ((_accelInput > 0) && (!soundControls.isPlaying()))
+        {
+            soundControls.playSound("acceleration");
+        }
+        if (_accelInput == 0)
+        {
+            soundControls.clipStop();
+        }
+
+        // Background Motor
+        if ((rb.velocity.x > 2) && (rb.velocity.z > 2))
+        {
+            soundControls.playSound("backgroundMotor");
+        }
+        else
+        {
+            soundControls.backgroundMotorStop();
+        }
+    }
+
+    public void StopMovement()
+    {
+        Debug.Log("stops");
+        _accelInput = 0f;
+        _steerInput = 0f;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        _isFinished = true;
+    }
+
+    private void EnableMovement()
+    {
+        _canMove = true;
+    }
+
+    public void ReduceSpeed(float reductionAmount, float duration)
+    {
+        // Get the current velocity of the car
+        Vector3 currentVelocity = rb.velocity;
+
+        // Calculate the reduced velocity
+        Vector3 reducedVelocity = currentVelocity * (1f - reductionAmount);
+
+        // Set the reduced velocity to the rigidbody
+        rb.velocity = reducedVelocity;
+
+        // Wait for the specified duration
+        StartCoroutine(RestoreSpeedAfterDelay(duration, currentVelocity));
+    }
+
+    private IEnumerator RestoreSpeedAfterDelay(float delay, Vector3 originalVelocity)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Restore the original velocity
+        rb.velocity = originalVelocity;
     }
 
 
@@ -126,6 +195,8 @@ public class CarPhysics : MonoBehaviour
         UpdateAcceleration(wheelTransforms.fLWheel);
         UpdateAcceleration(wheelTransforms.fRWheel);
     }
+
+
 
     void UpdateSuspension(Transform trans) {
         RaycastHit tireRay;       

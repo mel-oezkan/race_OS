@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class MohammadObstacle : MonoBehaviour
 {
+    //References
     [SerializeField] private SoundControls soundControls;
+    [SerializeField] private CarPhysics carPhysics;
+
+    // Collision Event
     public event System.Action OnMohammadCollision; // Event to be invoked when the car collides with a clock
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +29,10 @@ public class MohammadObstacle : MonoBehaviour
             Vector3 newRotation = objectTransform.rotation.eulerAngles;
             newRotation.z = newRotationAngle;
             objectTransform.rotation = Quaternion.Euler(newRotation);
+
+            //Reduces the speed 
+            carPhysics.ReduceSpeed(0.25f, 4f);
+
         }
     }
 }

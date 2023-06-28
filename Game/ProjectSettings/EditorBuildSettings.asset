@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 4c1a3015968f81b428fafdf29135e683
-  - enabled: 1
-    path: Assets/TextMesh Pro/Scenes/Copy.unity
+  - enabled: 0
+    path: Assets/TextMesh Pro/Scenes/Simplified_scene.unity
     guid: 204d6697793aed55fa8a3be2ad57f034
+  - enabled: 1
+    path: Assets/Scenes/Simplified_scene.unity
+    guid: 446fc9a4dff6c66fa86e76b6f7f96856
   m_configObjects: {}

@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 {
     // References
     private CountdownTimer countdownTimer; // Reference to the CountdownTimer script
-    public TextMeshProUGUI timerText; // Reference to the TextMeshProUGUI component for displaying the timer
+    [SerializeField] private TextMeshProUGUI timerText; // Reference to the TextMeshProUGUI component for displaying the timer
 
     // Variables
     private float _startTime; // The time at which the timer started
@@ -62,6 +62,6 @@ public class Timer : MonoBehaviour
 
     public void ClockReducesTime()
     {
-        _startTime += 10f; // Increase the start time by 4 seconds when the clock reduces time (used in Clock script)
+        _startTime += 5f; // Increase the start time by 4 seconds when the clock reduces time (used in Clock script)
     }
 }

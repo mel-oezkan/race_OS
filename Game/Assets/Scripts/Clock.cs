@@ -15,8 +15,6 @@ public class Clock : MonoBehaviour
     public event System.Action OnClockCollision; // Event to be invoked when the car collides with a clock
 
 
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,15 +31,16 @@ public class Clock : MonoBehaviour
     }
 
 
-
+    //Invokes certain events
     private void HandleClockCollision()
     {
-        soundControls.playSound("clock");
-        timer.ClockReducesTime();
-        clockText.text = "-10 sec";
-        StartCoroutine(HideClockText());
+        soundControls.playSound("clock"); //Plays bing sound
+        timer.ClockReducesTime(); //Reduces the elapsed time by 5 sec
+        clockText.text = "-5 sec"; //Displays the time reduction
+        StartCoroutine(HideClockText()); //Calls 'HideClockText'
     }
 
+    //Specifies that the '-5 sec' information is displayed for 2 seconds and then disappears
     private IEnumerator HideClockText()
     {
         yield return new WaitForSeconds(2f);

@@ -6,7 +6,11 @@ using TMPro;
 
 public class JojoObstacle : MonoBehaviour
 {
+    //References
     [SerializeField] private SoundControls soundControls;
+    [SerializeField] private CarPhysics carPhysics;
+
+    // Collision Event
     public event System.Action OnJojoCollision; // Event to be invoked when the car collides with a clock
 
 
@@ -30,19 +34,9 @@ public class JojoObstacle : MonoBehaviour
             Vector3 newRotation = objectTransform.rotation.eulerAngles;
             newRotation.z = newRotationAngle;
             objectTransform.rotation = Quaternion.Euler(newRotation);
-
-            
+            //Reduces the speed 
+            carPhysics.ReduceSpeed(0.25f, 4f);
 
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

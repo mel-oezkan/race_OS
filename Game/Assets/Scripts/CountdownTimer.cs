@@ -1,25 +1,27 @@
+// CountdownTimer.cs
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class CountdownTimer : MonoBehaviour
 {
-    //References
+    // References
     [SerializeField] private SoundControls soundControls;
-    [SerializeField] private CarControls carControls;
+    [SerializeField] private CarPhysics carPhysics;
     [SerializeField] private TextMeshProUGUI countdownText;
 
     public delegate void CountdownFinishedDelegate();
-    //Collision Event
+    // Collision Event
     public event CountdownFinishedDelegate OnCountdownFinished;
 
-    //Variables
+    // Variables
     private float _currentCountdownValue;
     public float _countdownDuration = 3f;
-    //Boolean Variables
+    // Boolean Variables
     public bool _canMove = false; // Flag to enable movement when countdown reaches "GO"
 
-    //Starts countdown with its sound and the game music 
+    // Starts countdown with its sound and the game music
     private void Start()
     {
         StartCountdown();
@@ -27,7 +29,7 @@ public class CountdownTimer : MonoBehaviour
         soundControls.playSound("countdown");
     }
 
-    //Starts the countdown
+    // Starts the countdown
     private void StartCountdown()
     {
         // Reinitalize the current countdown value as the 
@@ -38,15 +40,16 @@ public class CountdownTimer : MonoBehaviour
         // the countdown coroutine
         UpdateCountdownText();
         StartCoroutine(CountdownCoroutine());
+        StartCoroutine(StartCanMove());
     }
 
-    //Updates the text component representing the countdown
+    // Updates the text component representing the countdown
     private void UpdateCountdownText()
     {
         countdownText.text = _currentCountdownValue.ToString("F0");
     }
 
-    //Manages the visibility of countdown values that follow each other with a delay of 1 sec
+    // Manages the visibility of countdown values that follow each other with a delay of 1 sec
     private System.Collections.IEnumerator CountdownCoroutine()
     {
         // Wait for one second before starting the countdown
@@ -62,16 +65,20 @@ public class CountdownTimer : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        // Display a message or perform any action when the countdown reaches zero
-        countdownText.text = "GO!";
-        _canMove = true; // Enable movement
-
         // Invoke the OnCountdownFinished event
         OnCountdownFinished?.Invoke();
 
         // Hide the countdown text or perform any other desired action
         countdownText.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
+        // Enable the car's movement
+        //_canMove = true;
+    }
+
+    //This function enables movement in line with the end of the countdown
+    private System.Collections.IEnumerator StartCanMove()
+    {
+        yield return new WaitForSeconds(2.5f);
+        _canMove = true;
     }
 }
