@@ -40,7 +40,6 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private bool isBoostEnabled = false;
     
 
-
      // Start is called before the first frame update
     void Start()
     {
