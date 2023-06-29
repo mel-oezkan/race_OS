@@ -9,9 +9,8 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private CountdownTimer countdownTimer;
 
     // car specific variables
-    [SerializeField] private Transform[] tireTransform = new Transform[4];
-    [SerializeField] private WheelTransforms wheelTransforms;
     Rigidbody rb;
+    [SerializeField] private WheelTransforms _wheelTransforms;
 
     // handles the parameters for the car suspension
     [SerializeField] private float _restSupensionLen = 1f;
@@ -25,20 +24,18 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private float _accelInput = 0f; // forward backward input
 
     // handles the parameters for the car steering forces
-    //[SerializeField] private float maxSteeringAngle = 30f;
-    [SerializeField] private float tireMass = 10f;
+    [SerializeField] private float _tireMass = 10f;
 
     // other params
-    private float _dragFactor = -0.1f;
     public bool _isFinished = false;
     private bool _canMove = false;
+    private float _dragFactor = -0.1f;
 
-    [SerializeField] private AnimationCurve powerCurve;
-    [SerializeField] private AnimationCurve fontTireGrip;
-    [SerializeField] private AnimationCurve rearTireGrip;
-    [SerializeField] private AnimationCurve steeringCurve;
-    [SerializeField] private bool isBoostEnabled = false;
-    
+    [SerializeField] private AnimationCurve _powerCurve;
+    [SerializeField] private AnimationCurve _fontTireGrip;
+    [SerializeField] private AnimationCurve _rearTireGrip;
+    [SerializeField] private AnimationCurve _steeringCurve;
+    [SerializeField] private bool _isBoostEnabled = false;
     [SerializeField] ParticleSystem _turboparticle;
 
      // Start is called before the first frame update
@@ -53,28 +50,25 @@ public class CarPhysics : MonoBehaviour
         // Turbo boost and its effect
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            if(!isBoostEnabled)
+            if(!_isBoostEnabled)
             {
-                isBoostEnabled = true;
+                _isBoostEnabled = true;
                 _speedmultiplier = 3f;
-                Debug.Log("Boost enabled");
                 _turboparticle.startSpeed = 10f;
                 _turboparticle.Play();
-                DoDelay(1f, () =>
-               {
-            Debug.Log("Delay complete!");
-            isBoostEnabled = false;
-                Debug.Log("Boost disabled");
-                _accelInput = 0f;
-                _speedmultiplier = 1f;
-                _turboparticle.Stop();
-               }
-               );
+                
+                DoDelay(1f, () => {
+                    _isBoostEnabled = false;
+                    _accelInput = 0f;
+                    _speedmultiplier = 1f;
+                    _turboparticle.Stop();
+                });
             }
         }
         
     }
-      void DoDelay(float delayTime, System.Action callback)
+
+    void DoDelay(float delayTime, System.Action callback)
     {
         StartCoroutine(DelayCoroutine(delayTime, callback));
     }
@@ -82,7 +76,6 @@ public class CarPhysics : MonoBehaviour
     IEnumerator DelayCoroutine(float delayTime, System.Action callback)
     {
         yield return new WaitForSeconds(delayTime);
-
         callback?.Invoke();
     }
 
@@ -100,18 +93,8 @@ public class CarPhysics : MonoBehaviour
             HandleDrag();
         }
 
-        for (int i = 0; i < 4; i++)
-        {
-            Vector3 tireWorldVel = rb.GetPointVelocity(tireTransform[i].position);
-
-            Debug.DrawLine(
-                tireTransform[i].position,
-                tireTransform[i].position + tireWorldVel,
-                Color.yellow);
-        }
-
-        // Motor Sounds
-        if ((_accelInput > 0) && (!soundControls.isPlaying()))
+        // Handle the car sounds
+        if (_accelInput > 0 && !soundControls.isPlaying())
         {
             soundControls.playSound("acceleration");
         }
@@ -173,18 +156,18 @@ public class CarPhysics : MonoBehaviour
     void HandleDrag() {
         // apply the drag if car is not in motion
         if (_steerInput == 0 && _accelInput == 0) {
-            UpdateDrag(wheelTransforms.fLWheel);
-            UpdateDrag(wheelTransforms.fRWheel);
-            UpdateDrag(wheelTransforms.bLWheel);
-            UpdateDrag(wheelTransforms.bRWheel);
+            UpdateDrag(_wheelTransforms.fLWheel);
+            UpdateDrag(_wheelTransforms.fRWheel);
+            UpdateDrag(_wheelTransforms.bLWheel);
+            UpdateDrag(_wheelTransforms.bRWheel);
         }
     }
 
     void HandleSuspension() {
-        UpdateSuspension(wheelTransforms.fLWheel);
-        UpdateSuspension(wheelTransforms.fRWheel);
-        UpdateSuspension(wheelTransforms.bRWheel);
-        UpdateSuspension(wheelTransforms.bLWheel);
+        UpdateSuspension(_wheelTransforms.fLWheel);
+        UpdateSuspension(_wheelTransforms.fRWheel);
+        UpdateSuspension(_wheelTransforms.bRWheel);
+        UpdateSuspension(_wheelTransforms.bLWheel);
     }
 
     void HandleSteering () {
@@ -197,19 +180,19 @@ public class CarPhysics : MonoBehaviour
         // one wheel can add resistance while one is minimally to far up       
         if (rayDidHit) {
             // handle front tires
-            UpdateSteering(wheelTransforms.fRWheel, fontTireGrip);
-            UpdateSteering(wheelTransforms.fLWheel, fontTireGrip);        
+            UpdateSteering(_wheelTransforms.fRWheel, _fontTireGrip);
+            UpdateSteering(_wheelTransforms.fLWheel, _fontTireGrip);        
 
             // handle rear tires
-            UpdateSteering(wheelTransforms.bRWheel, rearTireGrip);
-            UpdateSteering(wheelTransforms.bLWheel, rearTireGrip);        
+            UpdateSteering(_wheelTransforms.bRWheel, _rearTireGrip);
+            UpdateSteering(_wheelTransforms.bLWheel, _rearTireGrip);        
         }
     }
 
 
     void HandleAcceleration () {
-        UpdateAcceleration(wheelTransforms.fLWheel);
-        UpdateAcceleration(wheelTransforms.fRWheel);
+        UpdateAcceleration(_wheelTransforms.fLWheel);
+        UpdateAcceleration(_wheelTransforms.fRWheel);
     }
 
 
@@ -264,20 +247,15 @@ public class CarPhysics : MonoBehaviour
         float desiredAccel = desiredChange / Time.fixedDeltaTime;
 
         rb.AddForceAtPosition(
-            (steeringDir * desiredAccel * tireMass), 
+            (steeringDir * desiredAccel * _tireMass), 
             trans.position);
 
         Debug.DrawLine(
             trans.position,
-            trans.position + steeringDir * desiredAccel , // (steeringDir * desiredAccel * tireMass),
+            trans.position + (steeringDir * desiredAccel * _tireMass),
             Color.red);
 
-        Debug.DrawLine(
-            trans.position,
-            trans.position + (steeringDir * steeringVel),
-            Color.white);
     }
-
     
 
     void UpdateAcceleration(Transform trans) {
@@ -295,7 +273,7 @@ public class CarPhysics : MonoBehaviour
 
             // normalize the car speed
             float normSpeed = Mathf.Clamp(Mathf.Abs(carSpeed) / _carTopSpeed, 0, 1);
-            float availableTorque = powerCurve.Evaluate(normSpeed) * _accelInput * _speedmultiplier;
+            float availableTorque = _powerCurve.Evaluate(normSpeed) * _accelInput * _speedmultiplier;
             Vector3 accelerationForce = accelDir * availableTorque ;
 
             // calculate the steering angle
@@ -314,8 +292,6 @@ public class CarPhysics : MonoBehaviour
                 trans.position,
                 trans.position + (accelerationForce),
                 Color.white);
-
-
         }
     }
 
@@ -330,15 +306,6 @@ public class CarPhysics : MonoBehaviour
     }
 }
 
-
-[System.Serializable]
-public class WheelColliders
-{
-    public WheelCollider fRWheel;
-    public WheelCollider fLWheel;
-    public WheelCollider bRWheel;
-    public WheelCollider bLWheel;
-}
 
 [System.Serializable]
 public class WheelTransforms

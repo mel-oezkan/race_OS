@@ -5,28 +5,28 @@ using UnityEngine;
 public class CamController : MonoBehaviour
 {
    
-    [SerializeField] private Rigidbody carRB;
-    [SerializeField] private Transform car;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private Rigidbody _carRB;
+    [SerializeField] private Transform _car;
+    [SerializeField] private Vector3 _offset;
 
     private void Start() 
     {
-        carRB = car.GetComponent<Rigidbody>();
+        _carRB = _car.GetComponent<Rigidbody>();
     }
 
     // updated after all other updates
     private void LateUpdate() 
     {   
         // calculate the car speed for dynamic camera movement
-        float carSpeed = Vector3.Dot(car.forward, carRB.velocity);
+        float carSpeed = Vector3.Dot(_car.forward, _carRB.velocity);
 
         transform.position = Vector3.Lerp(
             transform.position, 
-            car.position + car.transform.TransformVector(offset), 
+            _car.position + _car.transform.TransformVector(_offset), 
             Time.deltaTime * carSpeed
         );
 
-        transform.LookAt(car);
+        transform.LookAt(_car);
     }
 
 }

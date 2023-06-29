@@ -261,3 +261,13 @@ public class CarControls : MonoBehaviour
 }
 
 
+
+
+[System.Serializable]
+public class WheelColliders
+{
+    public WheelCollider fRWheel;
+    public WheelCollider fLWheel;
+    public WheelCollider bRWheel;
+    public WheelCollider bLWheel;
+}
