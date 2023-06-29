@@ -28,50 +28,49 @@ public class SoundControls : MonoBehaviour
 
     // Function that plays a specific sound clip based on the provided clipName variable
     public void playSound(string clipName)
-    {
-        if (clipName == "acceleration")
-        {
-            audioclipsSource.PlayOneShot(accelerationClip);
-        }
-        else if (clipName == "backgroundMotor")
-        {
-            audiobackgroundMotorSource.PlayOneShot(backgroundMotorClip);
-        }
-        else if (clipName == "good")
-        {
-            audioFinishSource.PlayOneShot(goodClip);
-        }
-        else if (clipName == "naja")
-        {
-            audioFinishSource.PlayOneShot(najaClip);
-        }
-        else if (clipName == "bad")
-        {
-            audioFinishSource.PlayOneShot(badClip);
-        }
-        else if (clipName == "countdown")
-        {
-            countdownSource.PlayOneShot(countdownClip);
-        }
-        else if (clipName == "gameMusic")
-        {
-            gameMusicSource.PlayOneShot(gameMusicClip);
-        }
-        else if (clipName == "clock")
-        {
-            clockSource.PlayOneShot(clockClip);
-        }
-        else if (clipName == "jojo")
-        {
-            humanSource.PlayOneShot(jojoClip);
-        }
-        else if (clipName == "mohammad")
-        {
-            humanSource.PlayOneShot(mohammadClip);
-        }
-        else if (clipName == "melih")
-        {
-            humanSource.PlayOneShot(melihClip);
+    {   
+        // play the respective sound clip based on the clipName variable
+        switch(clipName) {
+            // car sounds
+            case "acceleration":
+                audioclipsSource.PlayOneShot(accelerationClip);
+                break;
+            case "backgroundMotor":
+                audiobackgroundMotorSource.PlayOneShot(backgroundMotorClip);
+                break;
+
+            // finish line sounds
+            case "good":
+                audioFinishSource.PlayOneShot(goodClip);
+                break;
+            case "naja":
+                audioFinishSource.PlayOneShot(najaClip);
+                break;
+            case "bad":
+                audioFinishSource.PlayOneShot(badClip);
+                break;
+            
+            // gameplay sounds
+            case "countdown":
+                countdownSource.PlayOneShot(countdownClip);
+                break;
+            case "gameMusic":
+                gameMusicSource.PlayOneShot(gameMusicClip);
+                break;
+            case "clock":
+                clockSource.PlayOneShot(clockClip);
+                break;
+
+            // human obsticel sounds
+            case "jojo":
+                humanSource.PlayOneShot(jojoClip);
+                break;
+            case "mohammad":
+                humanSource.PlayOneShot(mohammadClip);
+                break;
+            case "melih":
+                humanSource.PlayOneShot(melihClip);
+                break;
         }
     }
 

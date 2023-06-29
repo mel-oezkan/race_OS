@@ -320,9 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5109bd50c1510f546890ae3958be9c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundControls: {fileID: 0}
-  carPhysics: {fileID: 0}
-  countdownText: {fileID: 26636153}
+  _soundControls: {fileID: 0}
+  _carPhysics: {fileID: 0}
+  _countdownText: {fileID: 0}
   _countdownDuration: 3
   _canMove: 0
 --- !u!114 &26636153
@@ -999,11 +999,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1500246115}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -1562,11 +1570,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1500246115}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -2620,7 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba90f08375fbe774ea76bf66e1d85618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishLine: {fileID: 0}
+  _finishLine: {fileID: 0}
   _isFinished: 0
 --- !u!1 &345756118
 GameObject:
@@ -3814,11 +3830,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1090294465}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -4413,8 +4437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c61b9499bbc5404081fb4a49e809cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundControls: {fileID: 470550360}
-  carPhysics: {fileID: 0}
+  _soundControls: {fileID: 0}
+  _carPhysics: {fileID: 0}
 --- !u!1 &559065200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6123,11 +6147,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1090294465}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -6871,11 +6903,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1090294465}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -8607,8 +8647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef39f03ec31efe4baa6b40e9526f267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundControls: {fileID: 470550360}
-  carPhysics: {fileID: 1963699441}
+  _soundControls: {fileID: 0}
+  _carPhysics: {fileID: 0}
 --- !u!114 &1138750196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8857,7 +8897,7 @@ GameObject:
   - component: {fileID: 1188508404}
   - component: {fileID: 1188508403}
   - component: {fileID: 1188508402}
-  - component: {fileID: 1188508401}
+  - component: {fileID: 1188508406}
   m_Layer: 5
   m_Name: ImageGood
   m_TagString: Untagged
@@ -8865,18 +8905,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1188508401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1188508400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61735d0ead635bb4191d95ba45109337, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1188508402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8959,6 +8987,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1188508406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188508400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36dd0edc9e24be778ac7a198c8fe4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1218705953
 GameObject:
   m_ObjectHideFlags: 0
@@ -11625,11 +11665,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1500246115}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _clockText
+      value: 
+      objectReference: {fileID: 1500246115}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -12230,7 +12282,7 @@ GameObject:
   - component: {fileID: 1611726401}
   - component: {fileID: 1611726400}
   - component: {fileID: 1611726399}
-  - component: {fileID: 1611726398}
+  - component: {fileID: 1611726403}
   m_Layer: 5
   m_Name: ImageBad
   m_TagString: Untagged
@@ -12238,18 +12290,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1611726398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611726397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785c2d2e5e4ae05478240c31644963f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1611726399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12332,6 +12372,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1611726403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611726397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36dd0edc9e24be778ac7a198c8fe4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1640351157
 Mesh:
   m_ObjectHideFlags: 0
@@ -12721,8 +12773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8b82a7023c43e4db0efb69a6cb783f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundControls: {fileID: 470550360}
-  carPhysics: {fileID: 0}
+  _soundControls: {fileID: 0}
+  _carPhysics: {fileID: 0}
 --- !u!114 &1688447974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13044,9 +13096,9 @@ MonoBehaviour:
   uiManager: {fileID: 344479306}
   carPhysics: {fileID: 1963699441}
   timer: {fileID: 264788091}
-  imageGood: {fileID: 1188508401}
-  imageNaja: {fileID: 1852012409}
-  imageBad: {fileID: 1611726398}
+  imageGood: {fileID: 1188508406}
+  imageNaja: {fileID: 1852012414}
+  imageBad: {fileID: 1611726403}
   _isFinished: 0
 --- !u!65 &1723906944
 BoxCollider:
@@ -13290,9 +13342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c669763785fb3ce549aa28f03059801b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carRB: {fileID: 1963699440}
-  car: {fileID: 1963699442}
-  offset: {x: 0, y: 4, z: -10}
+  _carRB: {fileID: 1963699440}
+  _car: {fileID: 1963699442}
+  _offset: {x: 0, y: 10, z: -10}
 --- !u!114 &1742357713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34996,11 +35048,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 264788091}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 264788091}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: clockText
       value: 
       objectReference: {fileID: 1500246115}
     - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
       propertyPath: soundControls
+      value: 
+      objectReference: {fileID: 470550360}
+    - target: {fileID: 7217752618193993189, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
+      propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
     m_RemovedComponents: []
@@ -35017,7 +35077,7 @@ GameObject:
   - component: {fileID: 1852012412}
   - component: {fileID: 1852012411}
   - component: {fileID: 1852012410}
-  - component: {fileID: 1852012409}
+  - component: {fileID: 1852012414}
   m_Layer: 5
   m_Name: ImageNaja
   m_TagString: Untagged
@@ -35025,18 +35085,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1852012409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852012408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0cbb1ed8adb9d841b8661af8639d961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1852012410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35119,6 +35167,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1852012414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852012408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36dd0edc9e24be778ac7a198c8fe4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1852215561
 GameObject:
   m_ObjectHideFlags: 0
@@ -35732,9 +35792,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5109bd50c1510f546890ae3958be9c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundControls: {fileID: 470550360}
-  carPhysics: {fileID: 1963699441}
-  countdownText: {fileID: 26636153}
+  _soundControls: {fileID: 470550360}
+  _carPhysics: {fileID: 1963699441}
+  _countdownText: {fileID: 26636153}
   _countdownDuration: 3
   _canMove: 0
 --- !u!4 &1921760358 stripped
@@ -36207,12 +36267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundControls: {fileID: 470550360}
   countdownTimer: {fileID: 1910932883}
-  tireTransform:
-  - {fileID: 677465617}
-  - {fileID: 806481359}
-  - {fileID: 328280392}
-  - {fileID: 32222727}
-  wheelTransforms:
+  _wheelTransforms:
     fRWheel: {fileID: 806481359}
     fLWheel: {fileID: 677465617}
     bRWheel: {fileID: 32222727}
@@ -36224,118 +36279,100 @@ MonoBehaviour:
   _speedmultiplier: 1
   _steerInput: 0
   _accelInput: 0
-  tireMass: 20
+  _tireMass: 10
   _isFinished: 0
-  powerCurve:
+  _powerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.01076889
+      value: 0.8486748
+      inSlope: -0.57326716
+      outSlope: -0.57326716
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0013428
+      value: 0.2808113
+      inSlope: -0.57326716
+      outSlope: -0.57326716
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _fontTireGrip:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0013465881
+      value: 0.7223091
+      inSlope: -1.6349976
+      outSlope: -1.6349976
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2109403
+      value: 0.3796239
+      inSlope: -0.10531554
+      outSlope: -0.10531554
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23838937
+    - serializedVersion: 3
+      time: 0.6794664
+      value: 0.36412084
+      inSlope: -0.11239694
+      outSlope: -0.11239694
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9971924
+      value: 0.3032112
+      inSlope: -0.19170491
+      outSlope: -0.19170491
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rearTireGrip:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.53510284
-      inSlope: 0.48060033
-      outSlope: 0.48060033
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.44295102
-    - serializedVersion: 3
-      time: 0.24915485
-      value: 0.98789555
-      inSlope: 0.023200933
-      outSlope: 0.023200933
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.28268144
-    - serializedVersion: 3
-      time: 0.66486514
-      value: 0.98485136
-      inSlope: 0.036359776
-      outSlope: 0.036359776
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.23480609
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9730835
-      value: 0.4290161
-      inSlope: -0.30326247
-      outSlope: -0.30326247
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.7510757
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fontTireGrip:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.02960968
-      value: 0.8128052
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.33339098
-      value: 0.055836253
-      inSlope: -0.015730072
-      outSlope: -0.015730072
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.12061608
-    - serializedVersion: 3
-      time: 0.9838257
-      value: 0.049922943
-      inSlope: 0.030926635
-      outSlope: 0.030926635
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.13801987
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  rearTireGrip:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.005382538
-      value: 0.5413208
-      inSlope: -0.25191253
-      outSlope: -0.25191253
+      value: 1
+      inSlope: -1.711425
+      outSlope: -1.711425
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.33428976
-      value: 0.4557531
-      inSlope: -0.68502325
-      outSlope: -0.68502325
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.15998827
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5115421
-      value: 0.10792742
-      inSlope: 0.010669444
-      outSlope: 0.010669444
-      tangentMode: 0
+      time: 0.3097423
+      value: 0.4698993
+      inSlope: -1.0354629
+      outSlope: -1.0354629
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.24434507
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.99731445
-      value: 0.056163788
-      inSlope: -0.10655944
-      outSlope: -0.10655944
+      time: 0.99194336
+      value: 0.22464752
+      inSlope: -0.35950074
+      outSlope: -0.35950074
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -36343,13 +36380,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  steeringCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  isBoostEnabled: 0
+  _isBoostEnabled: 0
   _turboparticle: {fileID: 772215291}
 --- !u!4 &1963699442
 Transform:

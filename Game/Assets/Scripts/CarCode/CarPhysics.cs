@@ -9,7 +9,7 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private CountdownTimer countdownTimer;
 
     // car specific variables
-    Rigidbody rb;
+    Rigidbody carRb;
     [SerializeField] private WheelTransforms _wheelTransforms;
 
     // handles the parameters for the car suspension
@@ -34,14 +34,13 @@ public class CarPhysics : MonoBehaviour
     [SerializeField] private AnimationCurve _powerCurve;
     [SerializeField] private AnimationCurve _fontTireGrip;
     [SerializeField] private AnimationCurve _rearTireGrip;
-    [SerializeField] private AnimationCurve _steeringCurve;
     [SerializeField] private bool _isBoostEnabled = false;
     [SerializeField] ParticleSystem _turboparticle;
 
      // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        carRb = GetComponent<Rigidbody>();
         countdownTimer.OnCountdownFinished += EnableMovement;
     }
     
@@ -79,6 +78,7 @@ public class CarPhysics : MonoBehaviour
         callback?.Invoke();
     }
 
+
     void FixedUpdate()
     {
         _steerInput = Input.GetAxis("Horizontal");
@@ -86,10 +86,18 @@ public class CarPhysics : MonoBehaviour
 
         if (countdownTimer._canMove && !_isFinished)
         {
+            Debug.Log("Car is moving");
             // Handle movement only if the countdown has reached "GO"
+            RaycastHit carRay;       
+            bool rayDidHit = Physics.Raycast(
+                _wheelTransforms.bLWheel.position, -transform.up, out carRay, _restSupensionLen);
             HandleSuspension();
-            HandleSteering();
-            HandleAcceleration();
+            
+            if (rayDidHit) {
+                HandleSteering();
+                HandleAcceleration();
+            }
+
             HandleDrag();
         }
 
@@ -104,7 +112,7 @@ public class CarPhysics : MonoBehaviour
         }
 
         // Background Motor
-        if ((rb.velocity.x > 2) && (rb.velocity.z > 2))
+        if ((carRb.velocity.x > 2) && (carRb.velocity.z > 2))
         {
             soundControls.playSound("backgroundMotor");
         }
@@ -114,15 +122,6 @@ public class CarPhysics : MonoBehaviour
         }
     }
 
-    public void StopMovement()
-    {
-        Debug.Log("stops");
-        _accelInput = 0f;
-        _steerInput = 0f;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        _isFinished = true;
-    }
 
     private void EnableMovement()
     {
@@ -132,13 +131,13 @@ public class CarPhysics : MonoBehaviour
     public void ReduceSpeed(float reductionAmount, float duration)
     {
         // Get the current velocity of the car
-        Vector3 currentVelocity = rb.velocity;
+        Vector3 currentVelocity = carRb.velocity;
 
         // Calculate the reduced velocity
         Vector3 reducedVelocity = currentVelocity * (1f - reductionAmount);
 
         // Set the reduced velocity to the rigidbody
-        rb.velocity = reducedVelocity;
+        carRb.velocity = reducedVelocity;
 
         // Wait for the specified duration
         StartCoroutine(RestoreSpeedAfterDelay(duration, currentVelocity));
@@ -149,7 +148,7 @@ public class CarPhysics : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         // Restore the original velocity
-        rb.velocity = originalVelocity;
+        carRb.velocity = originalVelocity;
     }
 
 
@@ -171,26 +170,19 @@ public class CarPhysics : MonoBehaviour
     }
 
     void HandleSteering () {
+    
+        // handle front tires
+        UpdateSteering(_wheelTransforms.fRWheel, _fontTireGrip);
+        UpdateSteering(_wheelTransforms.fLWheel, _fontTireGrip);        
 
-        RaycastHit tireRay;       
-        bool rayDidHit = Physics.Raycast(
-            transform.position, -transform.up, out tireRay, _restSupensionLen);
-        
-        // checking for every individual tire caused some bugs since
-        // one wheel can add resistance while one is minimally to far up       
-        if (rayDidHit) {
-            // handle front tires
-            UpdateSteering(_wheelTransforms.fRWheel, _fontTireGrip);
-            UpdateSteering(_wheelTransforms.fLWheel, _fontTireGrip);        
-
-            // handle rear tires
-            UpdateSteering(_wheelTransforms.bRWheel, _rearTireGrip);
-            UpdateSteering(_wheelTransforms.bLWheel, _rearTireGrip);        
-        }
+        // handle rear tires
+        UpdateSteering(_wheelTransforms.bRWheel, _rearTireGrip);
+        UpdateSteering(_wheelTransforms.bLWheel, _rearTireGrip);        
     }
 
 
     void HandleAcceleration () {
+
         UpdateAcceleration(_wheelTransforms.fLWheel);
         UpdateAcceleration(_wheelTransforms.fRWheel);
     }
@@ -198,6 +190,7 @@ public class CarPhysics : MonoBehaviour
 
 
     void UpdateSuspension(Transform trans) {
+
         RaycastHit tireRay;       
         bool rayDidHit = Physics.Raycast(
             trans.position, 
@@ -208,11 +201,10 @@ public class CarPhysics : MonoBehaviour
 
         // check if the raycast hit the ground
         if (rayDidHit) {
-
             // handle the tire damping direction 
             // (find in which direction the force should be applied)
             Vector3 springDir = transform.up;
-            Vector3 tireWorldVel = rb.GetPointVelocity(trans.position);
+            Vector3 tireWorldVel = carRb.GetPointVelocity(trans.position);
 
             float offset = _restSupensionLen - tireRay.distance;
 
@@ -225,7 +217,7 @@ public class CarPhysics : MonoBehaviour
                 trans.position + (vel * springDir),
                 Color.green);
             
-            rb.AddForceAtPosition(
+            carRb.AddForceAtPosition(
                 (springDir * force), 
                 trans.position);
         }
@@ -238,7 +230,7 @@ public class CarPhysics : MonoBehaviour
     ) {
     
         Vector3 steeringDir = trans.right;
-        Vector3 tireWorldVel = rb.GetPointVelocity(trans.position);
+        Vector3 tireWorldVel = carRb.GetPointVelocity(trans.position);
 
         float steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
         float tireGripFactor = gripCurve.Evaluate(Mathf.Abs(steeringVel)); 
@@ -246,7 +238,7 @@ public class CarPhysics : MonoBehaviour
         float desiredChange = -steeringVel * tireGripFactor;
         float desiredAccel = desiredChange / Time.fixedDeltaTime;
 
-        rb.AddForceAtPosition(
+        carRb.AddForceAtPosition(
             (steeringDir * desiredAccel * _tireMass), 
             trans.position);
 
@@ -259,6 +251,7 @@ public class CarPhysics : MonoBehaviour
     
 
     void UpdateAcceleration(Transform trans) {
+        // update teh acceleration of the car
         RaycastHit tireRay;       
         bool rayDidHit = Physics.Raycast(
             trans.position, -transform.up, out tireRay, _restSupensionLen);
@@ -269,7 +262,7 @@ public class CarPhysics : MonoBehaviour
             Vector3 steeringDir = trans.right;
 
             // calculate the car speed
-            float carSpeed = Vector3.Dot(transform.forward, rb.velocity);
+            float carSpeed = Vector3.Dot(transform.forward, carRb.velocity);
 
             // normalize the car speed
             float normSpeed = Mathf.Clamp(Mathf.Abs(carSpeed) / _carTopSpeed, 0, 1);
@@ -283,7 +276,7 @@ public class CarPhysics : MonoBehaviour
             Vector3 totalForce = accelDir * availableTorque + steeringDir * _steerInput;
            
             // Vector3 foreceProjection = Vector3.Project(accelerationForce, combinedForce).normalized;
-            rb.AddForceAtPosition(
+            carRb.AddForceAtPosition(
                 totalForce * _carTopSpeed ,
                 trans.position
             );
@@ -298,9 +291,9 @@ public class CarPhysics : MonoBehaviour
 
     void UpdateDrag(Transform trans) {
         // gets the velocity of the tire and reduces by some factor
-        Vector3 tireWorldVel = rb.GetPointVelocity(trans.position);
-        rb.AddForceAtPosition(
-            tireWorldVel * _dragFactor * rb.mass,
+        Vector3 tireWorldVel = carRb.GetPointVelocity(trans.position);
+        carRb.AddForceAtPosition(
+            tireWorldVel * _dragFactor * carRb.mass,
             trans.position
         );
     }

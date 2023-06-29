@@ -10,9 +10,9 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CarPhysics carPhysics;
     [SerializeField] private Timer timer;
-    [SerializeField] private ImageGood imageGood;
-    [SerializeField] private ImageNaja imageNaja;
-    [SerializeField] private ImageBad imageBad;
+    [SerializeField] private ImageHandler imageGood;
+    [SerializeField] private ImageHandler imageNaja;
+    [SerializeField] private ImageHandler imageBad;
 
     //public Button restart;
 

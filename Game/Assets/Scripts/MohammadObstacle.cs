@@ -5,8 +5,8 @@ using UnityEngine;
 public class MohammadObstacle : MonoBehaviour
 {
     //References
-    [SerializeField] private SoundControls soundControls;
-    [SerializeField] private CarPhysics carPhysics;
+    [SerializeField] private SoundControls _soundControls;
+    [SerializeField] private CarPhysics _carPhysics;
 
     // Collision Event
     public event System.Action OnMohammadCollision; // Event to be invoked when the car collides with a clock
@@ -16,7 +16,7 @@ public class MohammadObstacle : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //Plays the respective voice recording of Mohammad
-            soundControls.playSound("mohammad");
+            _soundControls.playSound("mohammad");
 
             // Invoke the OnClockCollision event
             OnMohammadCollision?.Invoke();
@@ -31,7 +31,7 @@ public class MohammadObstacle : MonoBehaviour
             objectTransform.rotation = Quaternion.Euler(newRotation);
 
             //Reduces the speed 
-            carPhysics.ReduceSpeed(0.25f, 4f);
+            _carPhysics.ReduceSpeed(0.25f, 4f);
 
         }
     }

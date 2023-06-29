@@ -16,27 +16,31 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        countdownTimer = FindObjectOfType<CountdownTimer>(); // Find the CountdownTimer script in the scene
-        countdownTimer.OnCountdownFinished += StartTimer; // Start the timer when the countdown is finished
+        // initalize countdownTimer and start timer when countdown is finished
+        countdownTimer = FindObjectOfType<CountdownTimer>(); 
+        countdownTimer.OnCountdownFinished += StartTimer; 
     }
 
     private void OnDestroy()
     {
-        countdownTimer.OnCountdownFinished -= StartTimer; // Unsubscribe from the countdown finished event
+        // Unsubscribe from the countdown finished event
+        countdownTimer.OnCountdownFinished -= StartTimer; 
     }
 
     private void StartTimer()
     {
-        _startTime = Time.time; // Set the start time to the current time
-        _timerStarted = true; // Set the timer started flag to true
+        // set timer variables
+        _startTime = Time.time; 
+        _timerStarted = true; 
     }
 
     private void Update()
     {
         if (_timerStarted)
         {
-            _elapsedTime = Time.time - _startTime; // Calculate the elapsed time since the timer started
-            UpdateTimerText(_elapsedTime); // Update the timer text display
+            // calc elapsed time and update timer text
+            _elapsedTime = Time.time - _startTime; 
+            UpdateTimerText(_elapsedTime); 
         }
     }
 
@@ -48,20 +52,23 @@ public class Timer : MonoBehaviour
 
     public void StopTimer()
     {
-        _timerStarted = false; // Stop the timer by setting the timer started flag to false
+        // Stop the timer by setting the timer started flag to false
+        _timerStarted = false; 
     }
 
     //Calculates the elapsed time
     public float GetElapsedTime()
     {
-        _elapsedTime = Time.time - _startTime - 2f; // Subtracts 2 sec, since the elapsed time
-                                                    // should not represent the time starting
-                                                    // from game begin but from end of countdown 
+        // Subtracts 2 sec, since the elapsed time
+        // should not represent the time starting
+        // from game begin but from end of countdown 
+        _elapsedTime = Time.time - _startTime - 2f; 
         return _elapsedTime;
     }
 
     public void ClockReducesTime()
     {
-        _startTime += 5f; // Increase the start time by 4 seconds when the clock reduces time (used in Clock script)
+        // Increase the start time by 4 seconds when the clock reduces time (used in Clock script)
+        _startTime += 5f; 
     }
 }

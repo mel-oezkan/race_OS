@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     //References
-    [SerializeField] private FinishLine finishLine;
+    [SerializeField] private FinishLine _finishLine;
 
     //Variables
     //Boolean Variables
     public bool _isFinished = false;
+
     //Array Variables
     GameObject[] pauseObjects;
     GameObject[] finishObjects;
@@ -20,10 +21,14 @@ public class UIManager : MonoBehaviour
     // Initialization 
     void Start()
     {
-        Time.timeScale = 1;          //Marker that differenciates between paused and not paused
+        // Marker that differenciates between paused and not paused
+        Time.timeScale = 1;          
 
-        pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");            //gets all objects with tag ShowOnPause
-        finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");          //gets all objects with tag ShowOnFinish
+        //gets all objects with tag ShowOnPause
+        pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");            
+        
+        //gets all objects with tag ShowOnFinish
+        finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");          
 
         hidePaused();            //Hides the pause menu
         hideFinished();          //Hides the finish menu
@@ -46,18 +51,21 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        //shows finish menu if isFinished is true (which is the case when the car passed the finish line)
+        //shows finish menu if isFinished is true 
+        // (which is the case when the car passed the finish line)
         if (_isFinished == true)
         {
             showFinished();
         }
     }
 
+
     //Reloads the Level
     public void Reload()
     {
         Application.LoadLevel(Application.loadedLevel);
     }
+
 
     public void QuitButton()
     {
@@ -121,7 +129,6 @@ public class UIManager : MonoBehaviour
     private IEnumerator ShowFinishedCoroutine()
     {
         yield return new WaitForSeconds(4f);
-
         foreach (GameObject g in finishObjects)
         {
             g.SetActive(true);

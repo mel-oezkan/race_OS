@@ -7,9 +7,9 @@ using TMPro;
 public class CountdownTimer : MonoBehaviour
 {
     // References
-    [SerializeField] private SoundControls soundControls;
-    [SerializeField] private CarPhysics carPhysics;
-    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private SoundControls _soundControls;
+    [SerializeField] private CarPhysics _carPhysics;
+    [SerializeField] private TextMeshProUGUI _countdownText;
 
     public delegate void CountdownFinishedDelegate();
     // Collision Event
@@ -17,7 +17,7 @@ public class CountdownTimer : MonoBehaviour
 
     // Variables
     private float _currentCountdownValue;
-    public float _countdownDuration = 3f;
+    [SerializeField] private float _countdownDuration = 3f;
 
     // Boolean Variables
     public bool _canMove = false; // Flag to enable movement when countdown reaches "GO"
@@ -26,8 +26,8 @@ public class CountdownTimer : MonoBehaviour
     private void Start()
     {
         StartCountdown();
-        soundControls.playSound("gameMusic");
-        soundControls.playSound("countdown");
+        _soundControls.playSound("gameMusic");
+        _soundControls.playSound("countdown");
     }
 
     // Starts the countdown
@@ -47,7 +47,7 @@ public class CountdownTimer : MonoBehaviour
     // Updates the text component representing the countdown
     private void UpdateCountdownText()
     {
-        countdownText.text = _currentCountdownValue.ToString("F0");
+        _countdownText.text = _currentCountdownValue.ToString("F0");
     }
 
     // Manages the visibility of countdown values that follow each other with a delay of 1 sec
@@ -70,7 +70,7 @@ public class CountdownTimer : MonoBehaviour
         OnCountdownFinished?.Invoke();
 
         // Hide the countdown text or perform any other desired action
-        countdownText.gameObject.SetActive(false);
+        _countdownText.gameObject.SetActive(false);
     }
 
     //This function enables movement in line with the end of the countdown

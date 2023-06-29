@@ -7,9 +7,9 @@ using TMPro;
 public class Clock : MonoBehaviour
 {
     //References
-    [SerializeField] private SoundControls soundControls;
-    [SerializeField] private Timer timer;
-    [SerializeField] private TextMeshProUGUI clockText;
+    [SerializeField] private SoundControls _soundControls;
+    [SerializeField] private Timer _timer;
+    [SerializeField] private TextMeshProUGUI _clockText;
 
     //Collision event
     public event System.Action OnClockCollision; // Event to be invoked when the car collides with a clock
@@ -34,9 +34,9 @@ public class Clock : MonoBehaviour
     //Invokes certain events
     private void HandleClockCollision()
     {
-        soundControls.playSound("clock"); //Plays bing sound
-        timer.ClockReducesTime(); //Reduces the elapsed time by 5 sec
-        clockText.text = "-5 sec"; //Displays the time reduction
+        _soundControls.playSound("clock"); //Plays bing sound
+        _timer.ClockReducesTime(); //Reduces the elapsed time by 5 sec
+        _clockText.text = "-5 sec"; //Displays the time reduction
         StartCoroutine(HideClockText()); //Calls 'HideClockText'
     }
 
@@ -44,6 +44,6 @@ public class Clock : MonoBehaviour
     private IEnumerator HideClockText()
     {
         yield return new WaitForSeconds(2f);
-        clockText.text = "";
+        _clockText.text = "";
     }
 }

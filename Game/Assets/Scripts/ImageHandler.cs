@@ -1,21 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ImageGood : MonoBehaviour
+public class ImageHandler : MonoBehaviour
 {
+    // simple class to handle the showing and hiding of images
 
-    //Hides image untill it becomes relevant
     private void Awake()
     {
+        // inital state is hidden
         HideImage();
     }
 
-    //Shows image
+    // Shows image
     public void ShowImage()
     {
         gameObject.SetActive(true);
     }
 
-    //Hides image
+    // Hides image
     public void HideImage()
     {
         gameObject.SetActive(false);
