@@ -16,8 +16,8 @@ public class CountdownTimer : MonoBehaviour
     public event CountdownFinishedDelegate OnCountdownFinished;
 
     // Variables
-    private float _currentCountdownValue;
     [SerializeField] private float _countdownDuration = 3f;
+    private float _currentCountdownValue;
 
     // Boolean Variables
     public bool _canMove = false; // Flag to enable movement when countdown reaches "GO"
