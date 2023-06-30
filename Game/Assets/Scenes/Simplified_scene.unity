@@ -280,7 +280,6 @@ GameObject:
   - component: {fileID: 26636151}
   - component: {fileID: 26636154}
   - component: {fileID: 26636153}
-  - component: {fileID: 26636152}
   m_Layer: 5
   m_Name: CountdownText
   m_TagString: Untagged
@@ -308,23 +307,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &26636152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26636150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5109bd50c1510f546890ae3958be9c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundControls: {fileID: 0}
-  carPhysics: {fileID: 0}
-  countdownText: {fileID: 0}
-  _countdownDuration: 3
-  _canMove: 0
 --- !u!114 &26636153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1000,8 @@ PrefabInstance:
       propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520803868343058937, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
 --- !u!1 &73898012
 GameObject:
@@ -1640,7 +1623,8 @@ PrefabInstance:
       propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520803868343058937, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
 --- !u!1 &175995131
 GameObject:
@@ -3904,7 +3888,8 @@ PrefabInstance:
       propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520803868343058937, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
 --- !u!1 &500429106
 GameObject:
@@ -6178,7 +6163,8 @@ PrefabInstance:
       propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520803868343058937, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
 --- !u!1 &836007827
 GameObject:
@@ -6938,7 +6924,8 @@ PrefabInstance:
       propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520803868343058937, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
 --- !u!1 &916883707
 GameObject:
@@ -11621,7 +11608,8 @@ PrefabInstance:
       propertyPath: _soundControls
       value: 
       objectReference: {fileID: 470550360}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520803868343058937, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47cd0b337f8d725459310b863a01d119, type: 3}
 --- !u!1 &1553999858
 GameObject:
@@ -35802,9 +35790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5109bd50c1510f546890ae3958be9c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundControls: {fileID: 470550360}
-  carPhysics: {fileID: 1963699441}
-  countdownText: {fileID: 26636153}
+  _soundControls: {fileID: 470550360}
+  _carPhysics: {fileID: 1963699441}
+  _countdownText: {fileID: 26636153}
   _countdownDuration: 3
   _canMove: 0
 --- !u!4 &1921760358 stripped
