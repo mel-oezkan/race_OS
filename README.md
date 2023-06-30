@@ -16,6 +16,16 @@ A second item is...
 Figures representing us (Melih, Johanna, Mohammad) are placed along the road. When the car runs over them, each character shouts in our voices and the car slows down.
 A third item is the portal, that would transfer the car from point A to point B forward on the road.
 Finally, the driver reaches the finish line. Depending on the time, a certain sound and an appropriate image are displayed. Images and sounds are classified as good, naja (neutral) and bad. After that a 'Game Over' menu is displayed. It offers the option to restart or quit the game.
+The car mechanics can be divided into four parts.
+
+-   acceleration
+    This function updates the acceleration of the car based on the input and current speed. It calculates the car's speed, normalizes it, and determines the available torque based on the acceleration input and speed multiplier. The function then applies the acceleration force in the forward direction and the steering force in the right direction to the car's Rigidbody. The acceleration force is drawn as a white line for debugging purposes.
+-   drag
+    This function applies drag to the car's tires. It calculates the tire's velocity and applies a drag force proportional to the tire's velocity and the drag factor. The force is applied at the tire's position using the car's Rigidbody.
+-   steering
+    This function updates the steering of the car. It calculates the tire's velocity in the steering direction and determines the grip factor using an animation curve. The desired change in velocity is calculated based on the current steering velocity and the grip factor. The desired resiting force is then applied into the opposite direction of the steering force
+-   suspension
+    This function updates the suspension of the car. It performs a raycast from the tire position in the opposite direction of the car's up vector to check if the tire is touching the ground. If the raycast hits the ground, it calculates the spring force and applies it to the car's Rigidbody at the tire's position. The force is calculated based on the offset between the rest suspension length and the distance from the tire to the ground, as well as the velocity of the tire in the spring direction. The suspension force is drawn as a green line for debugging purposes.
 
 ## Requirements
 
