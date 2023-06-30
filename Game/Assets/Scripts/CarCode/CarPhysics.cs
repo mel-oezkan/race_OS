@@ -81,8 +81,8 @@ public class CarPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        _steerInput = Input.GetAxis("Horizontal");
-        _accelInput = Input.GetAxis("Vertical");
+        _steerInput = Mathf.Clamp(Input.GetAxis("Horizontal"), -0.5f, 0.5f);
+        _accelInput = Mathf.Clamp(Input.GetAxis("Vertical"), -1f, 1f);
 
         if (countdownTimer._canMove && !_isFinished)
         {
@@ -233,7 +233,7 @@ public class CarPhysics : MonoBehaviour
         Vector3 tireWorldVel = carRb.GetPointVelocity(trans.position);
 
         float steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
-        float tireGripFactor = gripCurve.Evaluate(Mathf.Abs(steeringVel)); 
+        float tireGripFactor = gripCurve.Evaluate(steeringVel); 
 
         float desiredChange = -steeringVel * tireGripFactor;
         float desiredAccel = desiredChange / Time.fixedDeltaTime;
@@ -251,7 +251,7 @@ public class CarPhysics : MonoBehaviour
     
 
     void UpdateAcceleration(Transform trans) {
-        // update teh acceleration of the car
+        // update the acceleration of the car
         RaycastHit tireRay;       
         bool rayDidHit = Physics.Raycast(
             trans.position, -transform.up, out tireRay, _restSupensionLen);
