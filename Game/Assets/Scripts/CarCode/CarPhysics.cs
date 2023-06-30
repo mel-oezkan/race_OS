@@ -84,14 +84,19 @@ public class CarPhysics : MonoBehaviour
         _steerInput = Mathf.Clamp(Input.GetAxis("Horizontal"), -0.5f, 0.5f);
         _accelInput = Mathf.Clamp(Input.GetAxis("Vertical"), -1f, 1f);
 
+        // Handle movement only if the countdown has reached "GO"
         if (countdownTimer._canMove && !_isFinished)
         {
             Debug.Log("Car is moving");
-            // Handle movement only if the countdown has reached "GO"
+
+            // suspension handles the car movement for each wheel    
+            HandleSuspension();
+
+            // based on the cars postion 
+            // handling is not sensitive to each wheel
             RaycastHit carRay;       
             bool rayDidHit = Physics.Raycast(
                 _wheelTransforms.bLWheel.position, -transform.up, out carRay, _restSupensionLen);
-            HandleSuspension();
             
             if (rayDidHit) {
                 HandleSteering();
@@ -119,6 +124,18 @@ public class CarPhysics : MonoBehaviour
         else
         {
             soundControls.backgroundMotorStop();
+        }
+
+
+
+        // car can get buggy if the z rotation is not zero
+        if (transform.rotation.eulerAngles.z != 0)
+        {
+            transform.rotation = Quaternion.Euler(
+                transform.rotation.eulerAngles.x,
+                transform.rotation.eulerAngles.y,
+                0
+            );
         }
     }
 
@@ -228,13 +245,17 @@ public class CarPhysics : MonoBehaviour
         Transform trans, 
         AnimationCurve gripCurve
     ) {
-    
+        
+        // velocity in the steering dircetion
         Vector3 steeringDir = trans.right;
         Vector3 tireWorldVel = carRb.GetPointVelocity(trans.position);
-
         float steeringVel = Vector3.Dot(steeringDir, tireWorldVel);
+
+        // how much the wheel should resist the steering
         float tireGripFactor = gripCurve.Evaluate(steeringVel); 
 
+        // calculate the desired change in velocity
+        // e.g. -vel * 90 % reduces the velocity by 90%
         float desiredChange = -steeringVel * tireGripFactor;
         float desiredAccel = desiredChange / Time.fixedDeltaTime;
 
@@ -246,46 +267,39 @@ public class CarPhysics : MonoBehaviour
             trans.position,
             trans.position + (steeringDir * desiredAccel * _tireMass),
             Color.red);
-
     }
     
 
     void UpdateAcceleration(Transform trans) {
         // update the acceleration of the car
-        RaycastHit tireRay;       
-        bool rayDidHit = Physics.Raycast(
-            trans.position, -transform.up, out tireRay, _restSupensionLen);
+        Vector3 accelDir = trans.forward;
+        Vector3 steeringDir = trans.right;
 
+        // calculate the car speed
+        float carSpeed = Vector3.Dot(transform.forward, carRb.velocity);
 
-        if (rayDidHit) {
-            Vector3 accelDir = trans.forward;
-            Vector3 steeringDir = trans.right;
+        // normalize the car speed
+        float normSpeed = Mathf.Clamp(Mathf.Abs(carSpeed) / _carTopSpeed, 0, 1);
+        float availableTorque = _powerCurve.Evaluate(normSpeed) * _accelInput * _speedmultiplier;
+        Vector3 accelerationForce = accelDir * availableTorque ;
 
-            // calculate the car speed
-            float carSpeed = Vector3.Dot(transform.forward, carRb.velocity);
+        // calculate the steering angle
+        float steeringSensitivity = 0.5f; // Adjust the sensitivity as needed
+        float clampedSteeringAngle = _steerInput;
 
-            // normalize the car speed
-            float normSpeed = Mathf.Clamp(Mathf.Abs(carSpeed) / _carTopSpeed, 0, 1);
-            float availableTorque = _powerCurve.Evaluate(normSpeed) * _accelInput * _speedmultiplier;
-            Vector3 accelerationForce = accelDir * availableTorque ;
+        // steering and forward force
+        Vector3 totalForce = accelDir * availableTorque + steeringDir * _steerInput;
+        
+        // multiply by car top speed
+        carRb.AddForceAtPosition(
+            totalForce * _carTopSpeed ,
+            trans.position
+        );
 
-            // calculate the steering angle
-            float steeringSensitivity = 0.5f; // Adjust the sensitivity as needed
-            float clampedSteeringAngle = _steerInput;
-
-            Vector3 totalForce = accelDir * availableTorque + steeringDir * _steerInput;
-           
-            // Vector3 foreceProjection = Vector3.Project(accelerationForce, combinedForce).normalized;
-            carRb.AddForceAtPosition(
-                totalForce * _carTopSpeed ,
-                trans.position
-            );
-
-            Debug.DrawLine(
-                trans.position,
-                trans.position + (accelerationForce),
-                Color.white);
-        }
+        Debug.DrawLine(
+            trans.position,
+            trans.position + (accelerationForce),
+            Color.white);
     }
 
 
@@ -299,7 +313,7 @@ public class CarPhysics : MonoBehaviour
     }
 }
 
-
+// easier handling of values
 [System.Serializable]
 public class WheelTransforms
 {

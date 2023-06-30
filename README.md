@@ -1,5 +1,7 @@
 # race_OS
+
 ## Functionalities
+
 A simple racing game in parts of Osnabrück.
 
 A start menu offers the possibility to start the game by clicking a button or to quit the game with another button. Therefore, one has to start from the scene 'Menu'.
@@ -15,36 +17,6 @@ Figures representing us (Melih, Johanna, Mohammad) are placed along the road. Wh
 A third item is the portal, that would transfer the car from point A to point B forward on the road.
 Finally, the driver reaches the finish line. Depending on the time, a certain sound and an appropriate image are displayed. Images and sounds are classified as good, naja (neutral) and bad. After that a 'Game Over' menu is displayed. It offers the option to restart or quit the game.
 
-
-## Todos
-
-### Unity
-
--   [ ] Make the car freeze while Timer is running
--   [ ] Create a start and finish line
-    -   [ ] Track how far the car has traveled  
-             (prevent reaching the goal by driving backwards)
-    -   [ ] Create a time tracker to display the needed time
--   [ ] Create a leaderboard
-    -   [ ] Store the times of each run
-    -   [ ] Load the values from storage
-    -   [ ] Create interface for name
--   [ ] Create Nitro Item
--   [ ] Create other Item
--   [ ] Implement a better road
--   [ ] Create a car selection menu (dynamically spawn each car)
--   [ ] Add computer cars (following a line trough the map)
--   [ ] Add Component that tracks the car normal vector and flips the car when upside down
-
-### Blender
-
--   [ ] create customized cars
--   [ ] create customized env obj
-
--   Heger Tor
--   Include the parks
--   Create building textures
-
 ## Requirements
 
 -   Unity 2021.3.22f
@@ -53,22 +25,33 @@ Finally, the driver reaches the finish line. Depending on the time, a certain so
 
 -   Crating the road system: [Tutorial](https://www.youtube.com/watch?v=vUNfK4Nl_ec)
 -   Improve Car stability : [Tutorial - Pablos Lab](https://www.youtube.com/watch?v=BwL3Dm8GJtQ)
+-   Physics based driving [Link](https://www.youtube.com/watch?v=CdPYlj5uZeI&pp=ygUUdW5pdHkgY2FyIGNvbnRyb2xsZXI%3D)
 
 ## Problems
 
 -   Creating a useful raod system
--   Functioning Car Physics
-    -   14.06
+    -   previously we had a terrain that was realistic and thus was angled a lot
+    -   the angled surface thus made it annoying to create a usefull road
+        -   parts of the ground sticked out
+        -   we tried different assets but neither of them worked for us
+    -   as a solution we started to creata path create with which we wanted to create the road
+        -   creating the editor turned out to be a little to compex
+        -   we decided to simplify the ground to a simple flat surface
+-   Useful driving system
+
+    -   Wheel collider based driving
         -   Car is not steering right. It pushesh the car into a direction with a too large force
         -   Car is just drifting right and left. going straight seems no easy task
         -   When driving backwards the car takes ages to go back straight again
         -   Debugging of the backwards driving is also a nightmare because the camera is not tracking the car correctly. It takes to long to move behind the car and thus makes it unpossible to test the driving. But also increasing the speed of the camera causes the view to "wobble"
-- At high speed the items/obstacles did not make any sound -> Increasing the Min. Distance in the Audio Source setting caused the sound attenuation  to start later
-- When car was set as trigger in collider component, it started to move continuously and uncontrollable -> instead we used event system, which allowed to set only collision object as trigger
-- Integration of time delays -> StartCoroutine > IEnumerator
-- Lighting problem when integrating the menu: using the start menu to switch to the game scene results in a game scene without light -> Unity automatically adjusts the menu scene lighting settings (no light) to the game scene. We had to adjust these settings individually to avoid this problem.
-- Keeping track of all details (is it tagged, is the trigger set in the collision component, are all scripts attached, are all relevant scripts referenced)
+        -   after fixing some previous issues the car misaligned its velocity after driving backwards making it unpossible to drive reasonably
 
+-   At high speed the items/obstacles did not make any sound
+    -   Increasing the Min. Distance in the Audio Source setting caused the sound attenuation to start later
+-   When car was set as trigger in collider component, it started to move continuously and uncontrollable -> instead we used event system, which allowed to set only collision object as trigger
+-   Integration of time delays -> StartCoroutine > IEnumerator
+-   Lighting problem when integrating the menu: using the start menu to switch to the game scene results in a game scene without light -> Unity automatically adjusts the menu scene lighting settings (no light) to the game scene. We had to adjust these settings individually to avoid this problem.
+-   Keeping track of all details (is it tagged, is the trigger set in the collision component, are all scripts attached, are all relevant scripts referenced)
 
 ## Grading Scheme
 
