@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     //References
     [SerializeField] private FinishLine _finishLine;
-
+    public GameObject clocksonthestreet;
     //Variables
     //Boolean Variables
     public bool _isFinished = false;
@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
+                clocksonthestreet.SetActive(false);
                 showPaused();
             }
             else if (Time.timeScale == 0)
@@ -63,7 +64,10 @@ public class UIManager : MonoBehaviour
     //Reloads the Level
     public void Reload()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        //Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("Simplified_scene");
+        Debug.LogError("Restart clicked");
+        
     }
 
 
@@ -88,6 +92,7 @@ public class UIManager : MonoBehaviour
         }
         else if (Time.timeScale == 0)
         {
+            clocksonthestreet.SetActive(true);
             Time.timeScale = 1;
             hidePaused();
         }
